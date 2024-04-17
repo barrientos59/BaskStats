@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewPlayer"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dorsal"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewPlayerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="30dp"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/statsLayout"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_toRightOf="@id/imageViewPlayer"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Puntos: 0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewAssists"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asistencias: 0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewRebounds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rebotes: 0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewBlocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tapones: 0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewTurnovers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pérdidas: 0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewFouls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Faltas: 0"
+            android:textSize="16sp" />
+    </LinearLayout>
+</RelativeLayout>

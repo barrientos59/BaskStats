@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/groupStyle_2">
+
+    <TextView
+        android:id="@+id/textView_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scorebook Game"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp" />
+    <Button
+        android:id="@+id/btnFinalizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Finalizar"
+        android:textSize="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_marcador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/textView_titulo"
+        android:layout_centerHorizontal="true">
+
+        <Spinner
+            android:id="@+id/spinner_equipoLocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/equipos" />
+
+        <TextView
+            android:id="@+id/textView_puntosLocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
+            android:textSize="32sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_equipoVisitante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/equipos" />
+
+        <TextView
+            android:id="@+id/textView_puntosVisitante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
+            android:textSize="32sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_linea"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_below="@id/linearLayout_marcador" />
+
+    <ImageView
+        android:id="@+id/imageView_cancha"
+        android:layout_width="295dp"
+        android:layout_height="282dp"
+        android:layout_below="@id/view_linea"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/pista" />
+
+
+    <!-- Botones a cada lado de la foto -->
+    <LinearLayout
+        android:id="@+id/linearLayout_botones_izquierda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toStartOf="@id/imageView_cancha"
+        android:layout_alignTop="@id/imageView_cancha"
+        android:layout_alignBottom="@id/imageView_cancha"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="2dp">
+
+
+        <Button
+            android:id="@+id/j1_e1"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 1"
+            android:layout_marginBottom="-4dp"
+            />
+        <Button
+            android:id="@+id/j2_e1"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 2"
+            android:layout_marginBottom="-4dp"/>
+        <Button
+            android:id="@+id/j3_e1"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 3"
+            android:layout_marginBottom="-4dp"/>
+        <Button
+            android:id="@+id/j4_e1"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 4"
+            android:layout_marginBottom="-4dp"/>
+        <Button
+            android:id="@+id/j5_e1"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_botones_derecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toEndOf="@id/imageView_cancha"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/imageView_cancha"
+        android:layout_alignBottom="@id/imageView_cancha"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="2dp">
+
+
+        <Button
+            android:id="@+id/j1_e2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 1"
+            android:layout_marginBottom="-4dp"/>
+        <Button
+            android:id="@+id/j2_e2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 2"
+            android:layout_marginBottom="-4dp"/>
+        <Button
+            android:id="@+id/j3_e2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 3"
+            android:layout_marginBottom="-4dp"/>
+        <Button
+            android:id="@+id/j4_e2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 4"
+            android:layout_marginBottom="-4dp"/>
+        <Button
+            android:id="@+id/j5_e2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text=" 5" />
+
+    </LinearLayout>
+    <!-- Botones adicionales -->
+    <LinearLayout
+        android:id="@+id/linearLayout_botones_extra"
+        android:layout_width="360dp"
+        android:layout_height="330dp"
+        android:layout_below="@id/imageView_cancha"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAnotaTl"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="+TL" />
+
+            <Button
+                android:id="@+id/btnFallaTl"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="-TL" />
+
+            <Button
+                android:id="@+id/btnAnotaT2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="+T2" />
+
+            <Button
+                android:id="@+id/btnFallaT2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="-T2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAnotaT3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="+T3" />
+
+            <Button
+                android:id="@+id/btnFallaT3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="-T3" />
+
+            <Button
+                android:id="@+id/btnRebote"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="REB" />
+
+            <Button
+                android:id="@+id/btnRobo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="ROB" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAsistencia"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="ASIS" />
+
+            <Button
+                android:id="@+id/btnPerdida"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="PER" />
+
+            <Button
+                android:id="@+id/btnTap"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="TAP" />
+
+            <Button
+                android:id="@+id/btnfalta"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="FP" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

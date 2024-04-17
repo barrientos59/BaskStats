@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
+
+        <!-- Imagen del dorsal -->
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="60dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dorsal" />
+
+        <!-- Número del dorsal -->
+        <TextView
+            android:id="@+id/textDorsal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Número"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textApellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apellido"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textPosicion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Posición"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"/>
+
+</LinearLayout>

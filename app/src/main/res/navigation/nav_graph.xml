@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/iniciarSesion">
+
+    <fragment
+        android:id="@+id/crearEquipo"
+        android:name="com.example.proyectofinal.CrearEquipo"
+        android:label="fragment_crear_equipo"
+        tools:layout="@layout/fragment_crear_equipo" />
+
+
+    <fragment
+        android:id="@+id/registrar"
+        android:name="com.example.proyectofinal.Registrar"
+        android:label="fragment_registrar"
+        tools:layout="@layout/fragment_registrar" />
+    <fragment
+        android:id="@+id/iniciarSesion"
+        android:name="com.example.proyectofinal.IniciarSesion"
+        android:label="fragment_iniciar_sesion"
+        tools:layout="@layout/fragment_iniciar_sesion" />
+    <fragment
+        android:id="@+id/menuPrincipal"
+        android:name="com.example.proyectofinal.MenuPrincipal"
+        android:label="fragment_menu_principal"
+        tools:layout="@layout/fragment_menu_principal" />
+    <fragment
+        android:id="@+id/crearJugador"
+        android:name="com.example.proyectofinal.CrearJugador"
+        android:label="fragment_crear_jugador"
+        tools:layout="@layout/fragment_crear_jugador" />
+    <fragment
+        android:id="@+id/listaJugadoresEquipo"
+        android:name="com.example.proyectofinal.ListaJugadoresEquipo"
+        android:label="fragment_lista_jugadores_equipo"
+        tools:layout="@layout/fragment_lista_jugadores_equipo" />
+
+
+    <fragment
+        android:id="@+id/patidoFragment"
+        android:name="com.example.proyectofinal.PatidoFragment"
+        android:label="fragment_patido"
+        tools:layout="@layout/fragment_patido" />
+    <fragment
+        android:id="@+id/calendarioFragment"
+        android:name="com.example.proyectofinal.CalendarioFragment"
+        android:label="fragment_calendario"
+        tools:layout="@layout/fragment_calendario" />
+    <fragment
+        android:id="@+id/verEquipos"
+        android:name="com.example.proyectofinal.VerEquipos"
+        android:label="fragment_ver_equipos"
+        tools:layout="@layout/fragment_ver_equipos" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.proyectofinal.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/signOutFragment"
+        android:name="com.example.proyectofinal.SignOutFragment"
+        android:label="fragment_sign_out"
+        tools:layout="@layout/fragment_sign_out" />
+    <fragment
+        android:id="@+id/mapa"
+        android:name="com.example.proyectofinal.mapa"
+        android:label="fragment_mapa"
+        tools:layout="@layout/fragment_mapa" />
+    <fragment
+        android:id="@+id/verEstadisticaFragment"
+        android:name="com.example.proyectofinal.VerEstadisticaFragment"
+        android:label="fragment_ver_estadistica"
+        tools:layout="@layout/fragment_ver_estadistica" />
+    <fragment
+        android:id="@+id/estadisticaPartido"
+        android:name="com.example.proyectofinal.EstadisticaPartido"
+        android:label="fragment_estadistica_partido"
+        tools:layout="@layout/fragment_estadistica_partido" />
+</navigation>
