@@ -13,6 +13,7 @@ public class Equipo {
         this.ubicacion = ubicacion;
         this.idAutor = idAutor;
     }
+    public Equipo() {}
 
     public String getId() {
         return id;

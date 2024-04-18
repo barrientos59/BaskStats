@@ -62,7 +62,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewVerEquipos"
             android:layout_width="258dp"
             android:layout_height="341dp"
             android:layout_gravity="center"
