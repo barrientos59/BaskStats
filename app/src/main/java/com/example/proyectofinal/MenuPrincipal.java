@@ -1,5 +1,7 @@
 package com.example.proyectofinal;
 
+import static com.example.proyectofinal.R.id.btnmenucrear;
+
 import android.os.Bundle;
 
 import androidx.core.view.GravityCompat;
@@ -58,12 +60,12 @@ public class MenuPrincipal extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.verEstadisticaFragment);
             }
         });
-        Button CrearEquipo = view.findViewById(R.id.btnCrearEquipo);
-        CrearEquipo.setOnClickListener(new View.OnClickListener() {
+        Button btnMenucrear = view.findViewById(R.id.btnmenucrear);
+        btnMenucrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Navigation.findNavController(view).navigate(R.id.crearEquipo);
+                Navigation.findNavController(view).navigate(R.id.menuCrear);
             }
         });
         Button partido = view.findViewById(R.id.btnCrearPartido);
@@ -80,6 +82,16 @@ public class MenuPrincipal extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.verEquipos);
             }
         });
+
+
+        Button noticias = view.findViewById(R.id.btnNoticias);
+        noticias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.noticias);
+            }
+        });
+
         return view;
     }
 }

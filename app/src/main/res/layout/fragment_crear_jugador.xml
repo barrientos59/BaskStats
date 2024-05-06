@@ -19,8 +19,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarToolbar"
@@ -47,6 +49,7 @@
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
+
         <ImageView
             android:id="@+id/imageImageNine"
             android:layout_width="180dp"
@@ -55,10 +58,11 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/img_image9"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/txtLanguage"
             style="@style/txtOutfitbold25"
@@ -76,7 +80,7 @@
             style="@style/etSolidRoundedOutline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40pxv"
+            android:layout_marginTop="20dp"
             android:background="@drawable/rectangle_bg_gray_100_border_orange_700_radius_8"
             android:ellipsize="end"
             android:hint="@string/lbl_nombre"
@@ -95,7 +99,7 @@
             style="@style/etSolidRoundedOutline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40pxv"
+            android:layout_marginTop="20dp"
             android:background="@drawable/rectangle_bg_gray_100_border_orange_700_radius_8"
             android:ellipsize="end"
             android:hint="@string/lbl_apellido"
@@ -113,7 +117,7 @@
             android:id="@+id/CrearDorsalSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_45pxv"
+            android:layout_marginTop="20dp"
             android:background="@drawable/rectangle_bg_gray_100_border_orange_700_radius_8"
             android:paddingStart="@dimen/_20pxh"
             android:paddingTop="@dimen/_4pxv"
@@ -128,7 +132,7 @@
             style="@style/etSolidRoundedOutline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40pxv"
+            android:layout_marginTop="20dp"
             android:background="@drawable/rectangle_bg_gray_100_border_orange_700_radius_8"
             android:ellipsize="end"
             android:hint="@string/lbl_posicion"
@@ -141,13 +145,25 @@
             android:textColorHint="@color/gray_601"
             app:layout_constraintTop_toBottomOf="@id/CrearDorsalSpinner"
             tools:ignore="Autofill" />
-
+        <Spinner
+            android:id="@+id/AsignarEquipoSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rectangle_bg_gray_100_border_orange_700_radius_8"
+            android:paddingStart="@dimen/_20pxh"
+            android:paddingTop="@dimen/_4pxv"
+            android:paddingEnd="@dimen/_30pxh"
+            android:paddingBottom="@dimen/_9pxv"
+            android:textColorHint="@color/gray_601"
+            app:layout_constraintTop_toBottomOf="@id/CrearApellido"
+            tools:ignore="Autofill" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCrear"
             style="@style/btnSolidRounded_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_98pxv"
+            android:layout_marginTop="20dp"
             android:ellipsize="end"
             android:gravity="center"
             android:text="@string/lbl_crear"

@@ -7,6 +7,7 @@ public class Equipo {
     private String logo;
     private String idAutor; // Nuevo campo para el ID del usuario
 
+
     public Equipo(String id, String nombre, String ubicacion, String idAutor) {
         this.id = id;
         this.nombre = nombre;

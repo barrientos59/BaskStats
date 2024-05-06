@@ -63,7 +63,7 @@
                 android:text="@string/lbl_crear_partido"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnCrearEquipo"
+                android:id="@+id/btnmenucrear"
                 style="@style/btnGradientRounded"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 android:paddingEnd="@dimen/_30pxh"
                 android:paddingStart="@dimen/_30pxh"
                 android:paddingTop="@dimen/_17pxv"
-                android:text="@string/lbl_crear_equipo"/>
+                android:text="Crear Equipo/Jugador"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnVerEquipos"
@@ -100,6 +100,18 @@
                 android:paddingStart="@dimen/_30pxh"
                 android:paddingTop="@dimen/_17pxv"
                 android:text="Ver Estadistica"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNoticias"
+                style="@style/btnGradientRounded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10pxh"
+                android:layout_marginTop="@dimen/_55pxv"
+                android:paddingBottom="@dimen/_17pxv"
+                android:paddingEnd="@dimen/_30pxh"
+                android:paddingStart="@dimen/_30pxh"
+                android:paddingTop="@dimen/_17pxv"
+                android:text="Noticias NBA"/>
 
 
         </LinearLayout>

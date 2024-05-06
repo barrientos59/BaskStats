@@ -81,7 +81,7 @@ public class CrearEquipo extends Fragment {
                             .addOnSuccessListener(documentReference -> {
                                 // Team creation successful
                                 Toast.makeText(requireContext(), "Equipo creado", Toast.LENGTH_SHORT).show();
-                                navController.navigate(R.id.listaJugadoresEquipo);
+                                navController.navigate(R.id.menuCrear);
                             })
                             .addOnFailureListener(e -> {
                                 // Team creation failed
