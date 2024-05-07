@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -84,7 +86,13 @@ public class CrearJugador extends Fragment {
     }
 
     private void cargarEquiposEnSpinner() {
+        // Obtener el ID del usuario actual
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = currentUser.getUid();
+
+        // Realizar la consulta para obtener solo los equipos del usuario actual
         db.collection("equipos")
+                .whereEqualTo("idAutor", currentUserId)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -103,6 +111,7 @@ public class CrearJugador extends Fragment {
                     }
                 });
     }
+
 
     private void guardarJugador() {
         String nombre = CreraJugadorNombre.getText().toString().trim();
