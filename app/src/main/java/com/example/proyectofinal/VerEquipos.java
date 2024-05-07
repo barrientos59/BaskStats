@@ -20,6 +20,8 @@ import com.example.proyectofinal.Adapter.EquipoAdapter;
 import com.example.proyectofinal.Model.Equipo;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -33,11 +35,14 @@ public class VerEquipos extends Fragment {
     RecyclerView recyclerView;
     EquipoAdapter equipoAdapter;
     FirebaseFirestore firestore;
+    FirebaseAuth firebaseAuth;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // Inicializar FirebaseAuth
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @SuppressLint("MissingInflatedId")
@@ -48,15 +53,20 @@ public class VerEquipos extends Fragment {
         View view = inflater.inflate(R.layout.fragment_ver_equipos, container, false);
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
+        // Obtener usuario actual
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        String currentUserId = currentUser.getUid(); // Obtener el ID del usuario actual
+
         //Inicializar firestore y importar datos
         firestore = FirebaseFirestore.getInstance();
         recyclerView = view.findViewById(recyclerViewVerEquipos);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        Query query = firestore.collection("equipos");
 
-        FirestoreRecyclerOptions<Equipo> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Equipo>().setQuery(query,Equipo.class).build();
+        // Construir la consulta para obtener solo los equipos del usuario actual
+        Query query = firestore.collection("equipos").whereEqualTo("idAutor", currentUserId);
+
+        FirestoreRecyclerOptions<Equipo> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Equipo>().setQuery(query, Equipo.class).build();
         equipoAdapter = new EquipoAdapter(firestoreRecyclerOptions);
-        equipoAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(equipoAdapter);
 
         imageArrowLeft = view.findViewById(R.id.imageArrowleft);
