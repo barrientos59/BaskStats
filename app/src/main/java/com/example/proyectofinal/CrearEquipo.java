@@ -84,8 +84,14 @@ public class CrearEquipo extends Fragment {
                     String equipoId = db.collection("equipos").document().getId();
                     Equipo equipo = new Equipo(equipoId, nombreEquipo, ubicacionEquipo, idAutor);
 
-                    // Subir imagen a Firebase Storage y luego guardar el equipo en Firestore
-                    uploadImageToStorage(equipo);
+                    // Verificar si hay una imagen seleccionada
+                    if (imageUri != null) {
+                        // Subir imagen a Firebase Storage y luego guardar el equipo en Firestore
+                        uploadImageToStorage(equipo);
+                    } else {
+                        // Si no hay una imagen seleccionada, guarda el equipo en Firestore directamente
+                        saveEquipoToFirestore(equipo);
+                    }
                 } else {
                     Toast.makeText(requireContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
                 }
