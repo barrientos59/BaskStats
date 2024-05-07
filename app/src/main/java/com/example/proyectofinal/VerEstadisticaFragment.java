@@ -21,7 +21,7 @@ import java.util.List;
 public class VerEstadisticaFragment extends Fragment {
 
 
-    ImageView imageArrowLeft;
+
     NavController navController;
 
     public VerEstadisticaFragment() {
@@ -32,13 +32,6 @@ public class VerEstadisticaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ver_estadistica, container, false);
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-        imageArrowLeft = view.findViewById(R.id.imageArrowleft);
-        imageArrowLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.menuPrincipal);
-            }
-        });
 
         return view;
     }

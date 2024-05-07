@@ -30,7 +30,6 @@ import java.util.List;
 
 public class VerEquipos extends Fragment {
 
-    private ImageView imageArrowLeft;
     NavController navController;
     RecyclerView recyclerView;
     EquipoAdapter equipoAdapter;
@@ -69,13 +68,8 @@ public class VerEquipos extends Fragment {
         equipoAdapter = new EquipoAdapter(firestoreRecyclerOptions);
         recyclerView.setAdapter(equipoAdapter);
 
-        imageArrowLeft = view.findViewById(R.id.imageArrowleft);
-        imageArrowLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigateUp(); // Regresar al fragmento anterior
-            }
-        });
+
+
         return view;
     }
     @Override

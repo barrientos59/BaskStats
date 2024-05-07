@@ -28,7 +28,6 @@ import java.util.Map;
 public class CrearJugador extends Fragment {
 
     NavController navController;
-    ImageView imageArrowLeft;
     Button crearJugador;
     Spinner equipoSpinner, dorsalSpinner;
     List<String> nombresEquipos = new ArrayList<>();
@@ -50,16 +49,10 @@ public class CrearJugador extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_crear_jugador, container, false);
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-        imageArrowLeft = view.findViewById(R.id.imageArrowleft);
         CreraJugadorNombre = view.findViewById(R.id.CreraJugadorNombre);
         CrearApellido = view.findViewById(R.id.CrearApellido);
         CrearPosicion = view.findViewById(R.id.CrearPosicion);
-        imageArrowLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigateUp(); // Regresar al fragmento anterior
-            }
-        });
+
         crearJugador = view.findViewById(R.id.btnCrear);
         crearJugador.setOnClickListener(new View.OnClickListener() {
             @Override

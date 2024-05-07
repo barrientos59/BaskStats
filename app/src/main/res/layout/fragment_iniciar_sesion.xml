@@ -99,7 +99,7 @@
             android:id="@+id/gotoCreateAccountTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray_100"
+            android:textColor="@color/blue_A200"
             android:text="Create account here" />
 
         <TextView

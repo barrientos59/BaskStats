@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment {
     private static final int GALLERY_REQUEST_CODE = 1;
     private static final int CAMERA_REQUEST_CODE = 2;
 
-    ImageView photoImageView , imageArrowleft;
+    ImageView photoImageView ;
     TextView displayNameTextView, emailTextView;
     ImageButton changePhotoButton;
     EditText nameEditText;
@@ -59,7 +59,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        imageArrowleft = view.findViewById(R.id.imageArrowleft);
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
         photoImageView = view.findViewById(R.id.photoImageView);
         displayNameTextView = view.findViewById(R.id.displayNameTextView);
@@ -69,12 +68,7 @@ public class ProfileFragment extends Fragment {
         saveButton = view.findViewById(R.id.saveButton);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            imageArrowleft.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                  navController.navigate(R.id.menuPrincipal);
-                }
-            });
+
         if(user != null){
             displayNameTextView.setText(user.getDisplayName());
             emailTextView.setText(user.getEmail());

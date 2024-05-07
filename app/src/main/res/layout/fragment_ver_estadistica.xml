@@ -8,17 +8,7 @@
     android:orientation="horizontal"
     style="@style/groupStyle_4">
 
-    <ImageView
-        android:id="@+id/imageArrowleft"
-        android:layout_width="@dimen/_9pxh"
-        android:layout_height="@dimen/_16pxh"
-        android:scaleType="fitXY"
-        android:src="@drawable/img_arrowleft"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="@dimen/_16pxh"
-        android:layout_marginTop="@dimen/_37pxv"
-        tools:ignore="ContentDescription,MissingConstraints" />
+
 
     <LinearLayout
         android:id="@+id/linearColumncrearequipo"
