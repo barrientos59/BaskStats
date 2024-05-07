@@ -24,9 +24,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.UUID;
 
 public class CrearEquipo extends Fragment {
+    // Constantes
     private static final int PICK_IMAGE = 1;
+    private static final String STORAGE_PATH = "logoequip/";
+
+    // Variables
+    private Uri imageUri;
+    private StorageReference storageReference;
 
     NavController navController;
     Button btnCrearEquipo;
@@ -59,6 +69,9 @@ public class CrearEquipo extends Fragment {
             db.setFirestoreSettings(settings);
         }
 
+        // Inicializar Firebase Storage
+        storageReference = FirebaseStorage.getInstance().getReference();
+
         btnCrearEquipo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,27 +79,13 @@ public class CrearEquipo extends Fragment {
                 String ubicacionEquipo = etUbiCrearEquipo.getText().toString().trim();
 
                 if (!nombreEquipo.isEmpty() && !ubicacionEquipo.isEmpty()) {
-                    // Get current user ID with null check
                     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                     String idAutor = currentUser != null ? currentUser.getUid() : null;
-
-                    // Generate a unique team ID
                     String equipoId = db.collection("equipos").document().getId();
-
-                    // Create an Equipo object with the generated ID
                     Equipo equipo = new Equipo(equipoId, nombreEquipo, ubicacionEquipo, idAutor);
 
-                    // Save the team to Firestore
-                    db.collection("equipos").document(equipoId).set(equipo)
-                            .addOnSuccessListener(documentReference -> {
-                                // Team creation successful
-                                Toast.makeText(requireContext(), "Equipo creado", Toast.LENGTH_SHORT).show();
-                                navController.navigate(R.id.menuCrear);
-                            })
-                            .addOnFailureListener(e -> {
-                                // Team creation failed
-                                Toast.makeText(requireContext(), "Error al crear equipo", Toast.LENGTH_SHORT).show();
-                            });
+                    // Subir imagen a Firebase Storage y luego guardar el equipo en Firestore
+                    uploadImageToStorage(equipo);
                 } else {
                     Toast.makeText(requireContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
                 }
@@ -112,11 +111,44 @@ public class CrearEquipo extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
-            Uri imageUri = data.getData();
+            imageUri = data.getData();
             if (imageUri != null) {
                 imageViewLogo.setImageURI(imageUri);
                 imageViewLogo.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    private void uploadImageToStorage(final Equipo equipo) {
+        if (imageUri != null) {
+            StorageReference filePath = storageReference.child(STORAGE_PATH + UUID.randomUUID().toString());
+            filePath.putFile(imageUri)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        // Imagen cargada exitosamente
+                        filePath.getDownloadUrl().addOnSuccessListener(uri -> {
+                            // URL de descarga obtenida
+                            equipo.setLogo(uri.toString()); // Guardar la URL de la imagen en el objeto Equipo
+                            saveEquipoToFirestore(equipo); // Guardar el equipo en Firestore
+                        });
+                    })
+                    .addOnFailureListener(e -> {
+                        // Error al cargar la imagen
+                        Toast.makeText(requireContext(), "Error al cargar la imagen", Toast.LENGTH_SHORT).show();
+                    });
+        }
+    }
+
+    private void saveEquipoToFirestore(Equipo equipo) {
+        // Guardar el equipo en Firestore
+        db.collection("equipos").document(equipo.getId()).set(equipo)
+                .addOnSuccessListener(documentReference -> {
+                    // Equipo guardado exitosamente
+                    Toast.makeText(requireContext(), "Equipo creado", Toast.LENGTH_SHORT).show();
+                    navController.navigate(R.id.menuCrear);
+                })
+                .addOnFailureListener(e -> {
+                    // Error al guardar el equipo
+                    Toast.makeText(requireContext(), "Error al crear equipo", Toast.LENGTH_SHORT).show();
+                });
     }
 }
