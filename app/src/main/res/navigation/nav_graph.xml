@@ -36,7 +36,7 @@
         android:id="@+id/listaJugadoresEquipo"
         android:name="com.example.proyectofinal.ListaJugadoresEquipo"
         android:label="fragment_lista_jugadores_equipo"
-        tools:layout="@layout/fragment_lista_jugadores_equipo" />
+        tools:layout="@layout/fragment_mostrar_jugadores" />
 
 
     <fragment
