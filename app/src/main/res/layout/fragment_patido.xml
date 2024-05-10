@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/groupStyle_2">
@@ -84,97 +85,25 @@
         android:src="@drawable/pista" />
 
 
-    <!-- Botones a cada lado de la foto -->
-    <LinearLayout
-        android:id="@+id/linearLayout_botones_izquierda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_toStartOf="@id/imageView_cancha"
-        android:layout_alignTop="@id/imageView_cancha"
-        android:layout_alignBottom="@id/imageView_cancha"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_jugadoresLocal"
+        android:layout_width="59dp"
+        android:layout_height="282dp"
+        android:layout_below="@id/view_linea"
+        android:layout_marginBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_toLeftOf="@id/imageView_cancha" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_jugadoresVisitante"
+        android:layout_width="59dp"
+        android:layout_height="282dp"
+        android:layout_below="@id/view_linea"
+        android:layout_marginBottom="16dp"
+        android:layout_toRightOf="@id/imageView_cancha" />
 
 
-        <Button
-            android:id="@+id/j1_e1"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 1"
-            android:layout_marginBottom="-4dp"
-            />
-        <Button
-            android:id="@+id/j2_e1"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 2"
-            android:layout_marginBottom="-4dp"/>
-        <Button
-            android:id="@+id/j3_e1"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 3"
-            android:layout_marginBottom="-4dp"/>
-        <Button
-            android:id="@+id/j4_e1"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 4"
-            android:layout_marginBottom="-4dp"/>
-        <Button
-            android:id="@+id/j5_e1"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 5" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout_botones_derecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_toEndOf="@id/imageView_cancha"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@id/imageView_cancha"
-        android:layout_alignBottom="@id/imageView_cancha"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp">
-
-
-        <Button
-            android:id="@+id/j1_e2"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 1"
-            android:layout_marginBottom="-4dp"/>
-        <Button
-            android:id="@+id/j2_e2"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 2"
-            android:layout_marginBottom="-4dp"/>
-        <Button
-            android:id="@+id/j3_e2"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 3"
-            android:layout_marginBottom="-4dp"/>
-        <Button
-            android:id="@+id/j4_e2"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 4"
-            android:layout_marginBottom="-4dp"/>
-        <Button
-            android:id="@+id/j5_e2"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text=" 5" />
-
-    </LinearLayout>
-    <!-- Botones adicionales -->
     <LinearLayout
         android:id="@+id/linearLayout_botones_extra"
         android:layout_width="360dp"
