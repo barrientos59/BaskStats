@@ -22,7 +22,7 @@ public class JugadorAdapter extends FirestoreRecyclerAdapter<Jugador, JugadorAda
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int i, @NonNull Jugador jugador) {
 
-        viewHolder.textViewPlayerName.setText(jugador.getNombre());
+        viewHolder.textViewPlayerName.setText(jugador.getDorsal());
         viewHolder.textViewPoints.setText("Puntos: " + jugador.getPuntos());
         viewHolder.textViewAssists.setText("Asistencias: " + jugador.getAsistencias());
         viewHolder.textViewRebounds.setText("Rebotes: " + jugador.getRebotes());
@@ -37,7 +37,7 @@ public class JugadorAdapter extends FirestoreRecyclerAdapter<Jugador, JugadorAda
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_jugador, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_player, parent, false);
         return new ViewHolder(v);
     }
 

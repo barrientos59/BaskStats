@@ -13,6 +13,9 @@ public class Jugador {
     private int perdidas;
     private int faltas;
 
+    public Jugador() {
+    }
+
     public Jugador(String nombre, String apellido, String dorsal, String posicion) {
         this.nombre = nombre;
         this.apellido = apellido;

@@ -15,6 +15,7 @@
         android:id="@+id/textViewPlayerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:text="0"
         android:layout_marginLeft="38dp"
         android:layout_marginTop="30dp"
@@ -33,6 +34,7 @@
             android:id="@+id/textViewPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Puntos: 0"
             android:textSize="16sp" />
 
@@ -40,6 +42,7 @@
             android:id="@+id/textViewAssists"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Asistencias: 0"
             android:textSize="16sp" />
 
@@ -47,6 +50,7 @@
             android:id="@+id/textViewRebounds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Rebotes: 0"
             android:textSize="16sp" />
 
@@ -54,6 +58,7 @@
             android:id="@+id/textViewBlocks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Tapones: 0"
             android:textSize="16sp" />
 
@@ -61,6 +66,7 @@
             android:id="@+id/textViewTurnovers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Pérdidas: 0"
             android:textSize="16sp" />
 
@@ -68,6 +74,7 @@
             android:id="@+id/textViewFouls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Faltas: 0"
             android:textSize="16sp" />
     </LinearLayout>
