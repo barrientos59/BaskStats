@@ -162,6 +162,14 @@ public class CrearJugador extends Fragment {
         jugadorData.put("equipoId", equipoId);
         jugadorData.put("dorsal", dorsal);
 
+        // Añadir los nuevos campos
+        jugadorData.put("puntos", 0);
+        jugadorData.put("asistencias", 0);
+        jugadorData.put("rebotes", 0);
+        jugadorData.put("tapones", 0);
+        jugadorData.put("perdidas", 0);
+        jugadorData.put("faltas", 0);
+
         // Guardar los datos del jugador en Firestore
         db.collection("jugadores")
                 .add(jugadorData)
@@ -173,4 +181,5 @@ public class CrearJugador extends Fragment {
                     Toast.makeText(requireContext(), "Error al crear jugador: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
 }

@@ -6,11 +6,66 @@ public class Jugador {
     private String dorsal;
     private String posicion;
 
+    private int puntos;
+    private int asistencias;
+    private int rebotes;
+    private int tapones;
+    private int perdidas;
+    private int faltas;
+
     public Jugador(String nombre, String apellido, String dorsal, String posicion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dorsal = dorsal;
         this.posicion = posicion;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public int getAsistencias() {
+        return asistencias;
+    }
+
+    public void setAsistencias(int asistencias) {
+        this.asistencias = asistencias;
+    }
+
+    public int getRebotes() {
+        return rebotes;
+    }
+
+    public void setRebotes(int rebotes) {
+        this.rebotes = rebotes;
+    }
+
+    public int getTapones() {
+        return tapones;
+    }
+
+    public void setTapones(int tapones) {
+        this.tapones = tapones;
+    }
+
+    public int getPerdidas() {
+        return perdidas;
+    }
+
+    public void setPerdidas(int perdidas) {
+        this.perdidas = perdidas;
+    }
+
+    public int getFaltas() {
+        return faltas;
+    }
+
+    public void setFaltas(int faltas) {
+        this.faltas = faltas;
     }
 
     public String getNombre() {

@@ -14,10 +14,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.proyectofinal.Adapter.JugadorAdapter;
 import com.example.proyectofinal.Model.Jugador;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -132,7 +135,14 @@ public class PatidoFragment extends Fragment {
                             jugadores.add(jugador);
                         }
                         RecyclerView recyclerView = requireView().findViewById(recyclerViewId);
-                        JugadorAdapter adapter = new JugadorAdapter(jugadores);
+
+                        // Aquí se define 'query' para FirestoreRecyclerOptions
+                        Query query = db.collection("jugadores").whereEqualTo("equipo", nombreEquipo);
+
+                        FirestoreRecyclerOptions<Jugador> options = new FirestoreRecyclerOptions.Builder<Jugador>()
+                                .setQuery(query, Jugador.class)
+                                .build();
+                        JugadorAdapter adapter = new JugadorAdapter(options);
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged(); // Notificar al RecyclerView que los datos han cambiado
                     } else {
@@ -140,6 +150,9 @@ public class PatidoFragment extends Fragment {
                     }
                 });
     }
+
+
+
 
 
 }

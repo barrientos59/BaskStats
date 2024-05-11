@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.proyectofinal.Model.Jugador;
 import com.example.proyectofinal.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -22,6 +21,7 @@ public class JugadorAdapter extends FirestoreRecyclerAdapter<Jugador, JugadorAda
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int i, @NonNull Jugador jugador) {
+
         viewHolder.textViewPlayerName.setText(jugador.getNombre());
         viewHolder.textViewPoints.setText("Puntos: " + jugador.getPuntos());
         viewHolder.textViewAssists.setText("Asistencias: " + jugador.getAsistencias());
