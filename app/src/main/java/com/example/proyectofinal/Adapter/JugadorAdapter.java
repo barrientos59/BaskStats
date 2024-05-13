@@ -58,4 +58,3 @@ public class JugadorAdapter extends FirestoreRecyclerAdapter<Jugador, JugadorAda
         }
     }
 }
-
