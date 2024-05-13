@@ -12,9 +12,10 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proyectofinal.Adapter.JugadorAdapter;
+import com.example.proyectofinal.Adapter.JugadoresAdapterPartido;
 import com.example.proyectofinal.Model.Jugador;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -118,7 +119,6 @@ public class PatidoFragment extends Fragment {
     }
 
     // Método para cargar los jugadores del equipo seleccionado desde Firebase y mostrarlos en el RecyclerView
-    // Método para cargar los jugadores del equipo seleccionado desde Firebase y mostrarlos en el RecyclerView
     private void cargarJugadoresDelEquipo(String nombreEquipo, int recyclerViewId) {
         db.collection("jugadores")
                 .whereEqualTo("equipo", nombreEquipo)
@@ -134,25 +134,23 @@ public class PatidoFragment extends Fragment {
                             Jugador jugador = new Jugador(nombre, apellido, dorsal, posicion);
                             jugadores.add(jugador);
                         }
-                        RecyclerView recyclerView = requireView().findViewById(recyclerViewId);
 
-                        // Aquí se define 'query' para FirestoreRecyclerOptions
+                        // Construir FirestoreRecyclerOptions con la consulta ya realizada
                         Query query = db.collection("jugadores").whereEqualTo("equipo", nombreEquipo);
-
                         FirestoreRecyclerOptions<Jugador> options = new FirestoreRecyclerOptions.Builder<Jugador>()
                                 .setQuery(query, Jugador.class)
                                 .build();
-                        JugadorAdapter adapter = new JugadorAdapter(options);
+
+                        // Crear el adaptador utilizando las opciones
+                        JugadoresAdapterPartido adapter = new JugadoresAdapterPartido(options);
+                        RecyclerView recyclerView = requireView().findViewById(recyclerViewId);
                         recyclerView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged(); // Notificar al RecyclerView que los datos han cambiado
+
+                        // Opcional: Establecer un LayoutManager (por ejemplo, LinearLayoutManager)
+                        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
                     } else {
                         Toast.makeText(requireContext(), "Error al cargar jugadores del equipo " + nombreEquipo, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
-
-
-
-
 }

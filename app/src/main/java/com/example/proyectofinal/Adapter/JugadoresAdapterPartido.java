@@ -12,6 +12,7 @@ import com.example.proyectofinal.Model.Jugador;
 import com.example.proyectofinal.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.Query;
 
 public class JugadoresAdapterPartido extends FirestoreRecyclerAdapter<Jugador, JugadoresAdapterPartido.JugadorViewHolder> {
 
@@ -32,11 +33,12 @@ public class JugadoresAdapterPartido extends FirestoreRecyclerAdapter<Jugador, J
     }
 
     public static class JugadorViewHolder extends RecyclerView.ViewHolder {
-        TextView txtNombre, txtDorsal;
+        TextView txtDorsal;
 
         public JugadorViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtDorsal = itemView.findViewById(R.id.textViewPlayerDorsal);
+            txtDorsal = itemView.findViewById(R.id.textViewPlayerDorsal); // Asegúrate de que sea textViewPlayerDorsal
         }
     }
 }
+

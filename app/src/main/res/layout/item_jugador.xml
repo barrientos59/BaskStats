@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/orange_400">
 
     <ImageView
         android:id="@+id/imageViewPlayer"
@@ -15,7 +16,7 @@
         android:id="@+id/textViewPlayerDorsal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:text="0"
         android:layout_marginLeft="38dp"
         android:layout_marginTop="30dp"
