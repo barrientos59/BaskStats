@@ -30,11 +30,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.UUID;
 
 public class CrearEquipo extends Fragment {
-    // Constantes
     private static final int PICK_IMAGE = 1;
     private static final String STORAGE_PATH = "logoequip/";
 
-    // Variables
     private Uri imageUri;
     private StorageReference storageReference;
 
@@ -45,7 +43,7 @@ public class CrearEquipo extends Fragment {
     Button btnSeleccionarLogo;
     ImageView imageViewLogo;
 
-    FirebaseFirestore db; // Initialize Firestore instance
+    FirebaseFirestore db;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -60,7 +58,6 @@ public class CrearEquipo extends Fragment {
         btnSeleccionarLogo = view.findViewById(R.id.btnSeleccionarLogo);
         imageViewLogo = view.findViewById(R.id.imageViewLogo);
 
-        // Initialize Firestore
         if (db == null) {
             db = FirebaseFirestore.getInstance();
             FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
@@ -69,7 +66,6 @@ public class CrearEquipo extends Fragment {
             db.setFirestoreSettings(settings);
         }
 
-        // Inicializar Firebase Storage
         storageReference = FirebaseStorage.getInstance().getReference();
 
         btnCrearEquipo.setOnClickListener(new View.OnClickListener() {
@@ -84,12 +80,9 @@ public class CrearEquipo extends Fragment {
                     String equipoId = db.collection("equipos").document().getId();
                     Equipo equipo = new Equipo(equipoId, nombreEquipo, ubicacionEquipo, idAutor);
 
-                    // Verificar si hay una imagen seleccionada
                     if (imageUri != null) {
-                        // Subir imagen a Firebase Storage y luego guardar el equipo en Firestore
                         uploadImageToStorage(equipo);
                     } else {
-                        // Si no hay una imagen seleccionada, guarda el equipo en Firestore directamente
                         saveEquipoToFirestore(equipo);
                     }
                 } else {
@@ -102,6 +95,20 @@ public class CrearEquipo extends Fragment {
             @Override
             public void onClick(View v) {
                 openGallery();
+            }
+        });
+
+        etUbiCrearEquipo.setOnClickListener(new View.OnClickListener() {
+            private long lastClickTime = 0;
+            private static final long DOUBLE_CLICK_TIME_DELTA = 300;
+
+            @Override
+            public void onClick(View v) {
+                long clickTime = System.currentTimeMillis();
+                if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
+                    openMapFragment();
+                }
+                lastClickTime = clickTime;
             }
         });
 
@@ -130,31 +137,31 @@ public class CrearEquipo extends Fragment {
             StorageReference filePath = storageReference.child(STORAGE_PATH + UUID.randomUUID().toString());
             filePath.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> {
-                        // Imagen cargada exitosamente
                         filePath.getDownloadUrl().addOnSuccessListener(uri -> {
-                            // URL de descarga obtenida
-                            equipo.setLogo(uri.toString()); // Guardar la URL de la imagen en el objeto Equipo
-                            saveEquipoToFirestore(equipo); // Guardar el equipo en Firestore
+                            equipo.setLogo(uri.toString());
+                            saveEquipoToFirestore(equipo);
                         });
                     })
                     .addOnFailureListener(e -> {
-                        // Error al cargar la imagen
                         Toast.makeText(requireContext(), "Error al cargar la imagen", Toast.LENGTH_SHORT).show();
                     });
         }
     }
 
     private void saveEquipoToFirestore(Equipo equipo) {
-        // Guardar el equipo en Firestore
         db.collection("equipos").document(equipo.getId()).set(equipo)
                 .addOnSuccessListener(documentReference -> {
-                    // Equipo guardado exitosamente
                     Toast.makeText(requireContext(), "Equipo creado", Toast.LENGTH_SHORT).show();
                     navController.navigate(R.id.menuCrear);
                 })
                 .addOnFailureListener(e -> {
-                    // Error al guardar el equipo
                     Toast.makeText(requireContext(), "Error al crear equipo", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    private void openMapFragment() {
+        Bundle bundle = new Bundle();
+        bundle.putString("location", etUbiCrearEquipo.getText().toString());
+        navController.navigate(R.id.mapa, bundle);
     }
 }

@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import org.osmdroid.config.Configuration;
+import org.osmdroid.library.BuildConfig;
+
 public class MainActivity extends AppCompatActivity {
 
     private NavController navController;
@@ -16,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Inicializar NavController
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
+
     }
 
     @Override

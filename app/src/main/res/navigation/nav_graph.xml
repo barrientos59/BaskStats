@@ -66,7 +66,7 @@
         tools:layout="@layout/fragment_sign_out" />
     <fragment
         android:id="@+id/mapa"
-        android:name="com.example.proyectofinal.mapa"
+        android:name="com.example.proyectofinal.MapaFragment"
         android:label="fragment_mapa"
         tools:layout="@layout/fragment_mapa" />
     <fragment
