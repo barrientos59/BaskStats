@@ -30,6 +30,7 @@ public class PatidoFragment extends Fragment {
 
     private Spinner equipoSpinner, equipoSpinner2;
     private ArrayList<String> nombresEquipos = new ArrayList<>();
+    private ArrayList<String> idsEquipos = new ArrayList<>();
     private ArrayAdapter<String> adapter1, adapter2;
     private FirebaseFirestore db;
     private NavController navController;
@@ -59,7 +60,7 @@ public class PatidoFragment extends Fragment {
         equipoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cargarJugadoresDelEquipo(equipoSpinner.getSelectedItem().toString(), R.id.recyclerView_jugadoresLocal);
+                cargarJugadoresDelEquipo(idsEquipos.get(position), R.id.recyclerView_jugadoresLocal);
                 verificarEquiposDiferentes();
             }
 
@@ -72,7 +73,7 @@ public class PatidoFragment extends Fragment {
         equipoSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cargarJugadoresDelEquipo(equipoSpinner2.getSelectedItem().toString(), R.id.recyclerView_jugadoresVisitante);
+                cargarJugadoresDelEquipo(idsEquipos.get(position), R.id.recyclerView_jugadoresVisitante);
                 verificarEquiposDiferentes();
             }
 
@@ -105,9 +106,12 @@ public class PatidoFragment extends Fragment {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        nombresEquipos.clear(); // Limpiar la lista antes de agregar los nuevos equipos
+                        nombresEquipos.clear(); // Limpiar la lista antes de agregar los nuevos nombres de equipos
+                        idsEquipos.clear(); // Limpiar la lista de IDs de equipos antes de agregar los nuevos IDs
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            String nombreEquipo = document.getString("nombre");
+                            String idEquipo = document.getId(); // Obtenemos el ID del equipo
+                            idsEquipos.add(idEquipo);
+                            String nombreEquipo = document.getString("nombre"); // Obtener el nombre del equipo
                             nombresEquipos.add(nombreEquipo);
                         }
                         adapter1.notifyDataSetChanged();
@@ -119,9 +123,9 @@ public class PatidoFragment extends Fragment {
     }
 
     // Método para cargar los jugadores del equipo seleccionado desde Firebase y mostrarlos en el RecyclerView
-    private void cargarJugadoresDelEquipo(String nombreEquipo, int recyclerViewId) {
+    private void cargarJugadoresDelEquipo(String idEquipo, int recyclerViewId) {
         db.collection("jugadores")
-                .whereEqualTo("equipo", nombreEquipo)
+                .whereEqualTo("equipoId", idEquipo) // Usamos el ID del equipo
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -136,7 +140,7 @@ public class PatidoFragment extends Fragment {
                         }
 
                         // Construir FirestoreRecyclerOptions con la consulta ya realizada
-                        Query query = db.collection("jugadores").whereEqualTo("equipo", nombreEquipo);
+                        Query query = db.collection("jugadores").whereEqualTo("equipoId", idEquipo);
                         FirestoreRecyclerOptions<Jugador> options = new FirestoreRecyclerOptions.Builder<Jugador>()
                                 .setQuery(query, Jugador.class)
                                 .build();
@@ -149,7 +153,7 @@ public class PatidoFragment extends Fragment {
                         // Opcional: Establecer un LayoutManager (por ejemplo, LinearLayoutManager)
                         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
                     } else {
-                        Toast.makeText(requireContext(), "Error al cargar jugadores del equipo " + nombreEquipo, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Error al cargar jugadores del equipo", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
