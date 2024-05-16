@@ -1,44 +1,43 @@
-package com.example.proyectofinal.Adapter;
+    package com.example.proyectofinal.Adapter;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+    import android.view.LayoutInflater;
+    import android.view.View;
+    import android.view.ViewGroup;
+    import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+    import androidx.annotation.NonNull;
+    import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proyectofinal.Model.Jugador;
-import com.example.proyectofinal.R;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.Query;
+    import com.example.proyectofinal.Model.Jugador;
+    import com.example.proyectofinal.R;
+    import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+    import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class JugadoresAdapterPartido extends FirestoreRecyclerAdapter<Jugador, JugadoresAdapterPartido.JugadorViewHolder> {
+    public class JugadoresAdapterPartido extends FirestoreRecyclerAdapter<Jugador, JugadoresAdapterPartido.ViewHolder> {
 
-    public JugadoresAdapterPartido(@NonNull FirestoreRecyclerOptions<Jugador> options) {
-        super(options);
-    }
+        public JugadoresAdapterPartido(@NonNull FirestoreRecyclerOptions<Jugador> options) {
+            super(options);
+        }
 
-    @Override
-    protected void onBindViewHolder(@NonNull JugadorViewHolder holder, int position, @NonNull Jugador model) {
-        holder.txtDorsal.setText(model.getDorsal());
-    }
+        @Override
+        protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Jugador model) {
+            // Solo establece el texto del dorsal
+            holder.txtDorsal.setText(model.getDorsal());
+        }
 
-    @NonNull
-    @Override
-    public JugadorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_jugador, parent, false);
-        return new JugadorViewHolder(view);
-    }
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_jugador, parent, false);
+            return new ViewHolder(view);
+        }
 
-    public static class JugadorViewHolder extends RecyclerView.ViewHolder {
-        TextView txtDorsal;
+        static class ViewHolder extends RecyclerView.ViewHolder {
+            TextView txtDorsal;
 
-        public JugadorViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtDorsal = itemView.findViewById(R.id.textViewPlayerDorsal); // Asegúrate de que sea textViewPlayerDorsal
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                txtDorsal = itemView.findViewById(R.id.textViewPlayerDorsal);
+            }
         }
     }
-}
-

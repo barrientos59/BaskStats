@@ -148,13 +148,19 @@ public class PatidoFragment extends Fragment {
                         // Crear el adaptador utilizando las opciones
                         JugadoresAdapterPartido adapter = new JugadoresAdapterPartido(options);
                         RecyclerView recyclerView = requireView().findViewById(recyclerViewId);
+
+                        // Establecer el adaptador en el RecyclerView
                         recyclerView.setAdapter(adapter);
 
-                        // Opcional: Establecer un LayoutManager (por ejemplo, LinearLayoutManager)
+                        // Establecer un LayoutManager en el RecyclerView (por ejemplo, LinearLayoutManager)
                         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+                        // Opcional: Si es necesario, puedes añadir opciones adicionales al adaptador
+                         adapter.startListening();
                     } else {
                         Toast.makeText(requireContext(), "Error al cargar jugadores del equipo", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
 }
