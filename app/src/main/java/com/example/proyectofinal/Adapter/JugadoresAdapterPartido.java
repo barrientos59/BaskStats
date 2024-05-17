@@ -3,6 +3,7 @@
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
+    import android.widget.AdapterView;
     import android.widget.TextView;
 
     import androidx.annotation.NonNull;
@@ -14,15 +15,32 @@
     import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
     public class JugadoresAdapterPartido extends FirestoreRecyclerAdapter<Jugador, JugadoresAdapterPartido.ViewHolder> {
-
-        public JugadoresAdapterPartido(@NonNull FirestoreRecyclerOptions<Jugador> options) {
+        private OnItemClickListener mListener;
+        // Interfaz para manejar los clics en los elementos del RecyclerView
+        public interface OnItemClickListener {
+            void onItemClick(Jugador jugador, RecyclerView recyclerView);
+        }
+        public JugadoresAdapterPartido(@NonNull FirestoreRecyclerOptions<Jugador> options, OnItemClickListener listener) {
             super(options);
+            mListener = listener;
         }
 
         @Override
         protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Jugador model) {
             // Solo establece el texto del dorsal
             holder.txtDorsal.setText(model.getDorsal());
+            // Manejar clics en el elemento del RecyclerView
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        int position = holder.getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            mListener.onItemClick(model, (RecyclerView) holder.itemView.getParent()); // Pasar el jugador seleccionado y el RecyclerView al listener
+                        }
+                    }
+                }
+            });
         }
 
         @NonNull

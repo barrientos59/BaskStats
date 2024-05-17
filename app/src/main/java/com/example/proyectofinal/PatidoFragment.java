@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -26,7 +29,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class PatidoFragment extends Fragment {
+public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.OnItemClickListener {
 
     private Spinner equipoSpinner, equipoSpinner2;
     private ArrayList<String> nombresEquipos = new ArrayList<>();
@@ -34,6 +37,12 @@ public class PatidoFragment extends Fragment {
     private ArrayAdapter<String> adapter1, adapter2;
     private FirebaseFirestore db;
     private NavController navController;
+    private LinearLayout linearLayoutBotonesExtra;
+    private int puntosLocal = 0;
+    private int puntosVisitante = 0;
+    private TextView textViewPuntosLocal;
+    private TextView textViewPuntosVisitante;
+    private RecyclerView recyclerViewActual;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +52,65 @@ public class PatidoFragment extends Fragment {
         equipoSpinner2 = rootView.findViewById(R.id.spinner_equipoVisitante);
         db = FirebaseFirestore.getInstance();
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+        linearLayoutBotonesExtra = rootView.findViewById(R.id.linearLayout_botones_extra);
+        Button btnAnotaTl = rootView.findViewById(R.id.btnAnotaTl);
+        Button btnFallaTl = rootView.findViewById(R.id.btnFallaTl);
+        Button btnAnotaT2 = rootView.findViewById(R.id.btnAnotaT2);
+        Button btnFallaT2 = rootView.findViewById(R.id.btnFallaT2);
+        Button btnAnotaT3 = rootView.findViewById(R.id.btnAnotaT3);
+        Button btnFallaT3 = rootView.findViewById(R.id.btnFallaT3);
+        Button btnRebote = rootView.findViewById(R.id.btnRebote);
+        Button btnRobo = rootView.findViewById(R.id.btnRobo);
+        Button btnAsistencia = rootView.findViewById(R.id.btnAsistencia);
+        Button btnPerdida = rootView.findViewById(R.id.btnPerdida);
+        Button btnTap = rootView.findViewById(R.id.btnTap);
+        Button btnFalta = rootView.findViewById(R.id.btnfalta);
+        textViewPuntosLocal = rootView.findViewById(R.id.textView_puntosLocal);
+        textViewPuntosVisitante = rootView.findViewById(R.id.textView_puntosVisitante);
+
+        // Establecer OnClickListener para cada botón
+        btnAnotaTl.setOnClickListener(v -> hideButtons());
+        btnFallaTl.setOnClickListener(v -> hideButtons());
+        btnAnotaT2.setOnClickListener(v -> hideButtons());
+        btnFallaT2.setOnClickListener(v -> hideButtons());
+        btnAnotaT3.setOnClickListener(v -> hideButtons());
+        btnFallaT3.setOnClickListener(v -> hideButtons());
+        btnRebote.setOnClickListener(v -> hideButtons());
+        btnRobo.setOnClickListener(v -> hideButtons());
+        btnAsistencia.setOnClickListener(v -> hideButtons());
+        btnPerdida.setOnClickListener(v -> hideButtons());
+        btnTap.setOnClickListener(v -> hideButtons());
+        btnFalta.setOnClickListener(v -> hideButtons());
+        btnAnotaTl.setOnClickListener(v -> {
+            if (recyclerViewActual.getId() == R.id.recyclerView_jugadoresLocal) {
+                puntosLocal += 1;
+            } else if (recyclerViewActual.getId() == R.id.recyclerView_jugadoresVisitante) {
+                puntosVisitante += 1;
+            }
+            actualizarPuntos();
+            linearLayoutBotonesExtra.setVisibility(View.GONE);
+
+        });
+        btnAnotaT2.setOnClickListener(v -> {
+            if (recyclerViewActual.getId() == R.id.recyclerView_jugadoresLocal) {
+                puntosLocal += 2;
+            } else if (recyclerViewActual.getId() == R.id.recyclerView_jugadoresVisitante) {
+                puntosVisitante += 2;
+            }
+            actualizarPuntos();
+            linearLayoutBotonesExtra.setVisibility(View.GONE);
+
+        });
+        btnAnotaT3.setOnClickListener(v -> {
+            if (recyclerViewActual.getId() == R.id.recyclerView_jugadoresLocal) {
+                puntosLocal += 3;
+            } else if (recyclerViewActual.getId() == R.id.recyclerView_jugadoresVisitante) {
+                puntosVisitante += 3;
+            }
+            actualizarPuntos();
+            linearLayoutBotonesExtra.setVisibility(View.GONE);
+
+        });
 
         // Configuración de adaptadores para los Spinners
         adapter1 = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, nombresEquipos);
@@ -56,10 +124,10 @@ public class PatidoFragment extends Fragment {
         // Cargar equipos en los Spinners
         cargarEquiposEnSpinner();
 
-        // Configuración de listeners para los Spinners
         equipoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                recyclerViewActual = requireView().findViewById(R.id.recyclerView_jugadoresLocal);
                 cargarJugadoresDelEquipo(idsEquipos.get(position), R.id.recyclerView_jugadoresLocal);
                 verificarEquiposDiferentes();
             }
@@ -73,6 +141,7 @@ public class PatidoFragment extends Fragment {
         equipoSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                recyclerViewActual = requireView().findViewById(R.id.recyclerView_jugadoresVisitante);
                 cargarJugadoresDelEquipo(idsEquipos.get(position), R.id.recyclerView_jugadoresVisitante);
                 verificarEquiposDiferentes();
             }
@@ -145,8 +214,8 @@ public class PatidoFragment extends Fragment {
                                 .setQuery(query, Jugador.class)
                                 .build();
 
-                        // Crear el adaptador utilizando las opciones
-                        JugadoresAdapterPartido adapter = new JugadoresAdapterPartido(options);
+                        // Crear el adaptador utilizando las opciones y el fragmento como listener
+                        JugadoresAdapterPartido adapter = new JugadoresAdapterPartido(options, this);
                         RecyclerView recyclerView = requireView().findViewById(recyclerViewId);
 
                         // Establecer el adaptador en el RecyclerView
@@ -156,11 +225,36 @@ public class PatidoFragment extends Fragment {
                         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
                         // Opcional: Si es necesario, puedes añadir opciones adicionales al adaptador
-                         adapter.startListening();
+                        adapter.startListening();
                     } else {
                         Toast.makeText(requireContext(), "Error al cargar jugadores del equipo", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
+    // Método para manejar el clic en un jugador del RecyclerView
+
+
+    // Método para ocultar los botones
+    private void hideButtons() {
+        linearLayoutBotonesExtra.setVisibility(View.GONE);
+    }
+
+    private void actualizarPuntos() {
+        textViewPuntosLocal.setText(String.valueOf(puntosLocal));
+        textViewPuntosVisitante.setText(String.valueOf(puntosVisitante));
+    }
+    @Override
+    public void onItemClick(Jugador jugador, RecyclerView recyclerView) {
+        // Mostrar los botones en la parte inferior
+        linearLayoutBotonesExtra.setVisibility(View.VISIBLE);
+        // Guardar el RecyclerView actual
+        recyclerViewActual = recyclerView;
+
+
+        // Actualizar la vista de puntos
+        actualizarPuntos();
+    }
+
 
 }
