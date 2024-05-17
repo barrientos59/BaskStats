@@ -1,4 +1,5 @@
 package com.example.proyectofinal.Adapter;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class JugadorAdapter extends FirestoreRecyclerAdapter<Jugador, JugadorAda
         viewHolder.textViewPoints.setText("Puntos: " + jugador.getPuntos());
         viewHolder.textViewAssists.setText("Asistencias: " + jugador.getAsistencias());
         viewHolder.textViewRebounds.setText("Rebotes: " + jugador.getRebotes());
+        viewHolder.textViewRobos.setText("Robos: " + jugador.getRobos()); // Mostrar el valor de los robos
         viewHolder.textViewBlocks.setText("Tapones: " + jugador.getTapones());
         viewHolder.textViewTurnovers.setText("Pérdidas: " + jugador.getPerdidas());
         viewHolder.textViewFouls.setText("Faltas: " + jugador.getFaltas());
@@ -43,7 +45,7 @@ public class JugadorAdapter extends FirestoreRecyclerAdapter<Jugador, JugadorAda
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewPlayer;
-        TextView textViewPlayerName, textViewPoints, textViewAssists, textViewRebounds, textViewBlocks, textViewTurnovers, textViewFouls;
+        TextView textViewPlayerName, textViewPoints, textViewAssists, textViewRebounds, textViewRobos, textViewBlocks, textViewTurnovers, textViewFouls;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +54,7 @@ public class JugadorAdapter extends FirestoreRecyclerAdapter<Jugador, JugadorAda
             textViewPoints = itemView.findViewById(R.id.textViewPoints);
             textViewAssists = itemView.findViewById(R.id.textViewAssists);
             textViewRebounds = itemView.findViewById(R.id.textViewRebounds);
+            textViewRobos = itemView.findViewById(R.id.textViewRobos); // Agregar referencia a la vista de robos
             textViewBlocks = itemView.findViewById(R.id.textViewBlocks);
             textViewTurnovers = itemView.findViewById(R.id.textViewTurnovers);
             textViewFouls = itemView.findViewById(R.id.textViewFouls);

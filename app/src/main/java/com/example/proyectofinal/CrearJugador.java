@@ -169,17 +169,34 @@ public class CrearJugador extends Fragment {
         jugadorData.put("tapones", 0);
         jugadorData.put("perdidas", 0);
         jugadorData.put("faltas", 0);
+        jugadorData.put("robos", 0); // Agregar el campo "robos" con valor inicial 0
 
         // Guardar los datos del jugador en Firestore
         db.collection("jugadores")
                 .add(jugadorData)
                 .addOnSuccessListener(documentReference -> {
-                    Toast.makeText(requireContext(), "Jugador creado exitosamente", Toast.LENGTH_SHORT).show();
-                    navController.navigateUp(); // Regresar al fragmento anterior
+                    // Obtener el ID del nuevo documento creado
+                    String jugadorId = documentReference.getId();
+                    // Añadir el ID del jugador al mapa de datos del jugador
+                    jugadorData.put("IdJugador", jugadorId);
+                    // Actualizar el documento del jugador con el ID del jugador
+                    documentReference.set(jugadorData)
+                            .addOnSuccessListener(aVoid -> {
+                                // Éxito al actualizar el documento con el ID del jugador
+                                Toast.makeText(requireContext(), "Jugador creado exitosamente", Toast.LENGTH_SHORT).show();
+                                navController.navigateUp(); // Regresar al fragmento anterior
+                            })
+                            .addOnFailureListener(e -> {
+                                // Error al actualizar el documento con el ID del jugador
+                                Toast.makeText(requireContext(), "Error al guardar el ID del jugador: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
                 })
                 .addOnFailureListener(e -> {
+                    // Error al crear el documento del jugador
                     Toast.makeText(requireContext(), "Error al crear jugador: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
+
 
 }

@@ -1,52 +1,24 @@
 package com.example.proyectofinal.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Partido {
-    private String id;
-    private String equipoLocalId;
-    private String equipoVisitanteId;
+    private String idPartido;
     private int puntosLocal;
     private int puntosVisitante;
-    private List<Jugador> jugadoresLocal;
-    private List<Jugador> jugadoresVisitante;
+    private List<Jugador> jugadores;
 
-    // Constructor
-    public Partido(String id, String equipoLocalId, String equipoVisitanteId, int puntosLocal, int puntosVisitante,
-                   List<Jugador> jugadoresLocal, List<Jugador> jugadoresVisitante) {
-        this.id = id;
-        this.equipoLocalId = equipoLocalId;
-        this.equipoVisitanteId = equipoVisitanteId;
-        this.puntosLocal = puntosLocal;
-        this.puntosVisitante = puntosVisitante;
-        this.jugadoresLocal = jugadoresLocal;
-        this.jugadoresVisitante = jugadoresVisitante;
+    public Partido() {
+        jugadores = new ArrayList<>();
     }
 
-    // Getters y setters
-
-    public String getId() {
-        return id;
+    public String getIdPartido() {
+        return idPartido;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getEquipoLocalId() {
-        return equipoLocalId;
-    }
-
-    public void setEquipoLocalId(String equipoLocalId) {
-        this.equipoLocalId = equipoLocalId;
-    }
-
-    public String getEquipoVisitanteId() {
-        return equipoVisitanteId;
-    }
-
-    public void setEquipoVisitanteId(String equipoVisitanteId) {
-        this.equipoVisitanteId = equipoVisitanteId;
+    public void setIdPartido(String idPartido) {
+        this.idPartido = idPartido;
     }
 
     public int getPuntosLocal() {
@@ -65,19 +37,27 @@ public class Partido {
         this.puntosVisitante = puntosVisitante;
     }
 
-    public List<Jugador> getJugadoresLocal() {
-        return jugadoresLocal;
+    public List<Jugador> getJugadores() {
+        return jugadores;
     }
 
-    public void setJugadoresLocal(List<Jugador> jugadoresLocal) {
-        this.jugadoresLocal = jugadoresLocal;
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
     }
 
-    public List<Jugador> getJugadoresVisitante() {
-        return jugadoresVisitante;
+    // Método para agregar un jugador al partido
+    public void agregarJugador(Jugador jugador) {
+        jugadores.add(jugador);
     }
 
-    public void setJugadoresVisitante(List<Jugador> jugadoresVisitante) {
-        this.jugadoresVisitante = jugadoresVisitante;
+    // Método para representar el objeto como una cadena de texto
+    @Override
+    public String toString() {
+        return "Partido{" +
+                "idPartido='" + idPartido + '\'' +
+                ", puntosLocal=" + puntosLocal +
+                ", puntosVisitante=" + puntosVisitante +
+                ", jugadores=" + jugadores +
+                '}';
     }
 }

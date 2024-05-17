@@ -1,14 +1,22 @@
 package com.example.proyectofinal.Model;
 
 public class Jugador {
+    private String IdJugador;
     private String nombre;
     private String apellido;
     private String dorsal;
     private String posicion;
 
     private int puntos;
+    private int tirosAnotadosT1;
+    private int tirosFalladosT1;
+    private int tirosAnotadosT2;
+    private int tirosFalladosT2;
+    private int tirosAnotadosT3;
+    private int tirosFalladosT3;
     private int asistencias;
     private int rebotes;
+    private int robos;
     private int tapones;
     private int perdidas;
     private int faltas;
@@ -29,6 +37,70 @@ public class Jugador {
 
     public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    public int getTirosAnotadosT1() {
+        return tirosAnotadosT1;
+    }
+
+    public void setTirosAnotadosT1(int tirosAnotadosT1) {
+        this.tirosAnotadosT1 = tirosAnotadosT1;
+    }
+
+    public int getTirosFalladosT1() {
+        return tirosFalladosT1;
+    }
+
+    public void setTirosFalladosT1(int tirosFalladosT1) {
+        this.tirosFalladosT1 = tirosFalladosT1;
+    }
+
+    public int getTirosAnotadosT2() {
+        return tirosAnotadosT2;
+    }
+
+    public void setTirosAnotadosT2(int tirosAnotadosT2) {
+        this.tirosAnotadosT2 = tirosAnotadosT2;
+    }
+
+    public int getTirosFalladosT2() {
+        return tirosFalladosT2;
+    }
+
+    public void setTirosFalladosT2(int tirosFalladosT2) {
+        this.tirosFalladosT2 = tirosFalladosT2;
+    }
+
+    public int getTirosAnotadosT3() {
+        return tirosAnotadosT3;
+    }
+
+    public void setTirosAnotadosT3(int tirosAnotadosT3) {
+        this.tirosAnotadosT3 = tirosAnotadosT3;
+    }
+
+    public int getTirosFalladosT3() {
+        return tirosFalladosT3;
+    }
+
+    public void setTirosFalladosT3(int tirosFalladosT3) {
+        this.tirosFalladosT3 = tirosFalladosT3;
+    }
+
+    public int getRobos() {
+        return robos;
+    }
+
+    public void setRobos(int rebos) {
+        this.robos = rebos;
+    }
+
+    public String getIdJugador() {
+        return IdJugador;
+    }
+
+    public void setIdJugador(String idJugador) {
+        IdJugador = idJugador;
     }
 
     public int getAsistencias() {
