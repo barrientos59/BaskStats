@@ -45,12 +45,10 @@ public class Partido {
         this.jugadores = jugadores;
     }
 
-    // Método para agregar un jugador al partido
     public void agregarJugador(Jugador jugador) {
         jugadores.add(jugador);
     }
 
-    // Método para representar el objeto como una cadena de texto
     @Override
     public String toString() {
         return "Partido{" +

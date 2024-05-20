@@ -6,6 +6,7 @@ public class Jugador {
     private String apellido;
     private String dorsal;
     private String posicion;
+    private String equipoId; // Nuevo campo equipoId
 
     private int puntos;
     private int tirosAnotadosT1;
@@ -24,11 +25,63 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(String nombre, String apellido, String dorsal, String posicion) {
+    public Jugador(String idJugador, String nombre, String apellido, String dorsal, String posicion, String equipoId) {
+        this.IdJugador = idJugador;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dorsal = dorsal;
         this.posicion = posicion;
+        this.equipoId = equipoId; // Inicializar equipoId
+    }
+
+    // Getters y Setters
+
+    public String getIdJugador() {
+        return IdJugador;
+    }
+
+    public void setIdJugador(String idJugador) {
+        IdJugador = idJugador;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDorsal() {
+        return dorsal;
+    }
+
+    public void setDorsal(String dorsal) {
+        this.dorsal = dorsal;
+    }
+
+    public String getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(String posicion) {
+        this.posicion = posicion;
+    }
+
+    public String getEquipoId() {
+        return equipoId;
+    }
+
+    public void setEquipoId(String equipoId) {
+        this.equipoId = equipoId;
     }
 
     public int getPuntos() {
@@ -87,22 +140,6 @@ public class Jugador {
         this.tirosFalladosT3 = tirosFalladosT3;
     }
 
-    public int getRobos() {
-        return robos;
-    }
-
-    public void setRobos(int rebos) {
-        this.robos = rebos;
-    }
-
-    public String getIdJugador() {
-        return IdJugador;
-    }
-
-    public void setIdJugador(String idJugador) {
-        IdJugador = idJugador;
-    }
-
     public int getAsistencias() {
         return asistencias;
     }
@@ -117,6 +154,14 @@ public class Jugador {
 
     public void setRebotes(int rebotes) {
         this.rebotes = rebotes;
+    }
+
+    public int getRobos() {
+        return robos;
+    }
+
+    public void setRobos(int robos) {
+        this.robos = robos;
     }
 
     public int getTapones() {
@@ -142,37 +187,54 @@ public class Jugador {
     public void setFaltas(int faltas) {
         this.faltas = faltas;
     }
+// Métodos para incrementar estadísticas
 
-    public String getNombre() {
-        return nombre;
+    public void incrementarTirosAnotadosT1() {
+        this.tirosAnotadosT1++;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void incrementarTirosFalladosT1() {
+        this.tirosFalladosT1++;
     }
 
-    public String getApellido() {
-        return apellido;
+    public void incrementarTirosAnotadosT2() {
+        this.tirosAnotadosT2++;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void incrementarTirosFalladosT2() {
+        this.tirosFalladosT2++;
     }
 
-    public String getDorsal() {
-        return dorsal;
+    public void incrementarTirosAnotadosT3() {
+        this.tirosAnotadosT3++;
     }
 
-    public void setDorsal(String dorsal) {
-        this.dorsal = dorsal;
+    public void incrementarTirosFalladosT3() {
+        this.tirosFalladosT3++;
     }
 
-    public String getPosicion() {
-        return posicion;
+    public void incrementarAsistencias() {
+        this.asistencias++;
     }
 
-    public void setPosicion(String posicion) {
-        this.posicion = posicion;
+    public void incrementarRebotes() {
+        this.rebotes++;
+    }
+
+    public void incrementarRobos() {
+        this.robos++;
+    }
+
+    public void incrementarTapones() {
+        this.tapones++;
+    }
+
+    public void incrementarPerdidas() {
+        this.perdidas++;
+    }
+
+    public void incrementarFaltas() {
+        this.faltas++;
     }
 
     // Método para representar el objeto como una cadena de texto
@@ -183,6 +245,7 @@ public class Jugador {
                 ", apellido='" + apellido + '\'' +
                 ", dorsal='" + dorsal + '\'' +
                 ", posicion='" + posicion + '\'' +
+                ", equipoId='" + equipoId + '\'' +
                 '}';
     }
 }
