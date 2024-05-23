@@ -17,7 +17,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class VerEstadisticaFragment extends Fragment {
+public class VerPartidosFragment extends Fragment {
 
     private FirebaseFirestore db;
     private PartidoAdapter partidoAdapter;
@@ -25,7 +25,7 @@ public class VerEstadisticaFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_ver_estadistica, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_ver_partidos, container, false);
 
         db = FirebaseFirestore.getInstance();
 

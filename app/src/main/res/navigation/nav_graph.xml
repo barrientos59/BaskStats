@@ -45,11 +45,6 @@
         android:label="fragment_patido"
         tools:layout="@layout/fragment_patido" />
     <fragment
-        android:id="@+id/calendarioFragment"
-        android:name="com.example.proyectofinal.CalendarioFragment"
-        android:label="fragment_calendario"
-        tools:layout="@layout/fragment_calendario" />
-    <fragment
         android:id="@+id/verEquipos"
         android:name="com.example.proyectofinal.VerEquipos"
         android:label="fragment_ver_equipos"
@@ -71,9 +66,9 @@
         tools:layout="@layout/fragment_mapa" />
     <fragment
         android:id="@+id/verEstadisticaFragment"
-        android:name="com.example.proyectofinal.VerEstadisticaFragment"
+        android:name="com.example.proyectofinal.VerPartidosFragment"
         android:label="fragment_ver_estadistica"
-        tools:layout="@layout/fragment_ver_estadistica" />
+        tools:layout="@layout/fragment_ver_partidos" />
     <fragment
         android:id="@+id/estadisticaPartido"
         android:name="com.example.proyectofinal.EstadisticaPartido"
