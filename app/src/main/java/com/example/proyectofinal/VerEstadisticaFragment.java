@@ -4,37 +4,54 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.proyectofinal.Adapter.PartidoAdapter;
+import com.example.proyectofinal.Model.Partido;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class VerEstadisticaFragment extends Fragment {
 
+    private FirebaseFirestore db;
+    private PartidoAdapter partidoAdapter;
 
-
-    NavController navController;
-
-    public VerEstadisticaFragment() {
-        // Constructor vacío requerido por Fragment
-    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ver_estadistica, container, false);
-        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+        View rootView = inflater.inflate(R.layout.fragment_ver_estadistica, container, false);
 
-        return view;
+        db = FirebaseFirestore.getInstance();
+
+        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerViewEstadisticas);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        Query query = db.collection("partidos");
+        FirestoreRecyclerOptions<Partido> options = new FirestoreRecyclerOptions.Builder<Partido>()
+                .setQuery(query, Partido.class)
+                .build();
+
+        partidoAdapter = new PartidoAdapter(options);
+        recyclerView.setAdapter(partidoAdapter);
+
+        return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        partidoAdapter.startListening();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        partidoAdapter.stopListening();
+    }
 }

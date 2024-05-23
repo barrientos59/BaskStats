@@ -8,8 +8,6 @@
     android:orientation="horizontal"
     style="@style/groupStyle_4">
 
-
-
     <LinearLayout
         android:id="@+id/linearColumncrearequipo"
         android:layout_width="359dp"
@@ -49,7 +47,6 @@
             android:singleLine="true"
             android:text="Partidos"
             tools:text="Partidos" />
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewEstadisticas"
