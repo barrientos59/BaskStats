@@ -1,6 +1,6 @@
 package com.example.proyectofinal.Model;
 
-public class Jugador {
+public class JugadorPartido {
     private String idJugador;
     private String nombre;
     private String apellido;
@@ -8,7 +8,6 @@ public class Jugador {
     private String posicion;
     private String equipoId;
 
-    private int puntos;
     private int tirosAnotadosT1;
     private int tirosFalladosT1;
     private int tirosAnotadosT2;
@@ -22,10 +21,10 @@ public class Jugador {
     private int perdidas;
     private int faltas;
 
-    public Jugador() {
+    public JugadorPartido() {
     }
 
-    public Jugador(String idJugador, String nombre, String apellido, String dorsal, String posicion, String equipoId) {
+    public JugadorPartido(String idJugador, String nombre, String apellido, String dorsal, String posicion, String equipoId) {
         this.idJugador = idJugador;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -80,14 +79,6 @@ public class Jugador {
 
     public void setEquipoId(String equipoId) {
         this.equipoId = equipoId;
-    }
-
-    public int getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
     }
 
     public int getTirosAnotadosT1() {
@@ -186,76 +177,9 @@ public class Jugador {
         this.faltas = faltas;
     }
 
-    // Métodos para incrementar estadísticas
-
-    public void incrementarTirosAnotadosT1() {
-        this.tirosAnotadosT1++;
-    }
-
-    public void incrementarTirosFalladosT1() {
-        this.tirosFalladosT1++;
-    }
-
-    public void incrementarTirosAnotadosT2() {
-        this.tirosAnotadosT2++;
-    }
-
-    public void incrementarTirosFalladosT2() {
-        this.tirosFalladosT2++;
-    }
-
-    public void incrementarTirosAnotadosT3() {
-        this.tirosAnotadosT3++;
-    }
-
-    public void incrementarTirosFalladosT3() {
-        this.tirosFalladosT3++;
-    }
-
-    public void incrementarAsistencias() {
-        this.asistencias++;
-    }
-
-    public void incrementarRebotes() {
-        this.rebotes++;
-    }
-
-    public void incrementarRobos() {
-        this.robos++;
-    }
-
-    public void incrementarTapones() {
-        this.tapones++;
-    }
-
-    public void incrementarPerdidas() {
-        this.perdidas++;
-    }
-
-    public void incrementarFaltas() {
-        this.faltas++;
-    }
-
-    // Método para actualizar estadísticas
-    public void actualizarEstadisticas(Jugador jugador) {
-        this.puntos += jugador.getPuntos();
-        this.tirosAnotadosT1 += jugador.getTirosAnotadosT1();
-        this.tirosFalladosT1 += jugador.getTirosFalladosT1();
-        this.tirosAnotadosT2 += jugador.getTirosAnotadosT2();
-        this.tirosFalladosT2 += jugador.getTirosFalladosT2();
-        this.tirosAnotadosT3 += jugador.getTirosAnotadosT3();
-        this.tirosFalladosT3 += jugador.getTirosFalladosT3();
-        this.asistencias += jugador.getAsistencias();
-        this.rebotes += jugador.getRebotes();
-        this.robos += jugador.getRobos();
-        this.tapones += jugador.getTapones();
-        this.perdidas += jugador.getPerdidas();
-        this.faltas += jugador.getFaltas();
-    }
-
     @Override
     public String toString() {
-        return "Jugador{" +
+        return "JugadorPartido{" +
                 "idJugador='" + idJugador + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +

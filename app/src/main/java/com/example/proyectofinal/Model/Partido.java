@@ -7,10 +7,20 @@ public class Partido {
     private String idPartido;
     private int puntosLocal;
     private int puntosVisitante;
-    private List<Jugador> jugadores;
+    private List<JugadorPartido> jugadoresLocal;
+    private List<JugadorPartido> jugadoresVisitante;
 
     public Partido() {
-        jugadores = new ArrayList<>();
+        jugadoresLocal = new ArrayList<>();
+        jugadoresVisitante = new ArrayList<>();
+    }
+
+    public Partido(String idPartido, int puntosLocal, int puntosVisitante, List<JugadorPartido> jugadoresLocal, List<JugadorPartido> jugadoresVisitante) {
+        this.idPartido = idPartido;
+        this.puntosLocal = puntosLocal;
+        this.puntosVisitante = puntosVisitante;
+        this.jugadoresLocal = jugadoresLocal;
+        this.jugadoresVisitante = jugadoresVisitante;
     }
 
     public String getIdPartido() {
@@ -37,16 +47,20 @@ public class Partido {
         this.puntosVisitante = puntosVisitante;
     }
 
-    public List<Jugador> getJugadores() {
-        return jugadores;
+    public List<JugadorPartido> getJugadoresLocal() {
+        return jugadoresLocal;
     }
 
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
+    public void setJugadoresLocal(List<JugadorPartido> jugadoresLocal) {
+        this.jugadoresLocal = jugadoresLocal;
     }
 
-    public void agregarJugador(Jugador jugador) {
-        jugadores.add(jugador);
+    public List<JugadorPartido> getJugadoresVisitante() {
+        return jugadoresVisitante;
+    }
+
+    public void setJugadoresVisitante(List<JugadorPartido> jugadoresVisitante) {
+        this.jugadoresVisitante = jugadoresVisitante;
     }
 
     @Override
@@ -55,7 +69,8 @@ public class Partido {
                 "idPartido='" + idPartido + '\'' +
                 ", puntosLocal=" + puntosLocal +
                 ", puntosVisitante=" + puntosVisitante +
-                ", jugadores=" + jugadores +
+                ", jugadoresLocal=" + jugadoresLocal +
+                ", jugadoresVisitante=" + jugadoresVisitante +
                 '}';
     }
 }

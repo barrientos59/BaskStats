@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal.Adapter.JugadoresAdapterPartido;
 import com.example.proyectofinal.Model.Jugador;
+import com.example.proyectofinal.Model.JugadorPartido;
 import com.example.proyectofinal.Model.Partido;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,11 +45,11 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
     private TextView textViewPuntosLocal;
     private TextView textViewPuntosVisitante;
     private RecyclerView recyclerViewActual;
-    private List<Jugador> jugadoresLocal = new ArrayList<>();
-    private List<Jugador> jugadoresVisitante = new ArrayList<>();
+    private List<JugadorPartido> jugadoresLocal = new ArrayList<>();
+    private List<JugadorPartido> jugadoresVisitante = new ArrayList<>();
     private ArrayAdapter<String> adapter1;
     private ArrayAdapter<String> adapter2;
-    private Jugador jugadorSeleccionado;
+    private JugadorPartido jugadorSeleccionado;
     private LinearLayout layoutBotones;
     private Button btnAnotaTl, btnFallaTl, btnAnotaT2, btnFallaT2, btnAnotaT3, btnFallaT3,
             btnAsistencia, btnRebote, btnRobo, btnTap, btnPerdida, btnFalta;
@@ -119,7 +120,10 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
             }
         });
 
-        btnFinalizar.setOnClickListener(v -> guardarPartido());
+        btnFinalizar.setOnClickListener(v -> {
+            guardarPartido();
+            navController.navigate(R.id.menuPrincipal); // Navega a MenuFragment
+        });
 
         return rootView;
     }
@@ -159,7 +163,7 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
                 });
     }
 
-    private void cargarJugadoresDelEquipo(String idEquipo, int recyclerViewId, List<Jugador> listaJugadores) {
+    private void cargarJugadoresDelEquipo(String idEquipo, int recyclerViewId, List<JugadorPartido> listaJugadores) {
         db.collection("jugadores")
                 .whereEqualTo("equipoId", idEquipo)
                 .get()
@@ -173,7 +177,7 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
                             String dorsal = document.getString("dorsal");
                             String posicion = document.getString("posicion");
                             String equipoId = document.getString("equipoId"); // Obtener el id del equipo
-                            Jugador jugador = new Jugador(idJugador, nombre, apellido, dorsal, posicion, equipoId);
+                            JugadorPartido jugador = new JugadorPartido(idJugador, nombre, apellido, dorsal, posicion, equipoId);
                             listaJugadores.add(jugador);
                         }
 
@@ -194,32 +198,22 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
     }
 
     private void guardarPartido() {
-        Partido partido = new Partido();
-        partido.setIdPartido(UUID.randomUUID().toString()); // Asignar un ID único al partido
-        partido.setPuntosLocal(puntosLocal);
-        partido.setPuntosVisitante(puntosVisitante);
-        partido.setJugadores(new ArrayList<>()); // Inicializar la lista de jugadores
+        String partidoId = UUID.randomUUID().toString();
+        Partido partido = new Partido(partidoId, puntosLocal, puntosVisitante, jugadoresLocal, jugadoresVisitante);
 
-        // Agregar jugadores locales
-        for (Jugador jugador : jugadoresLocal) {
-            partido.agregarJugador(jugador);
-        }
-
-        // Agregar jugadores visitantes
-        for (Jugador jugador : jugadoresVisitante) {
-            partido.agregarJugador(jugador);
-        }
-
-        db.collection("partidos")
-                .document(partido.getIdPartido())
-                .set(partido)
-                .addOnSuccessListener(aVoid -> Toast.makeText(requireContext(), "Partido guardado con éxito", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(requireContext(), "Error al guardar el partido", Toast.LENGTH_SHORT).show());
+        // Guardar el partido en la colección de partidos
+        db.collection("partidos").document(partidoId).set(partido)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Partido guardado con éxito", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error al guardar el partido", Toast.LENGTH_SHORT).show();
+                });
     }
 
     @Override
     public void onItemClick(Jugador jugador, RecyclerView recyclerView) {
-        jugadorSeleccionado = jugador;
+        jugadorSeleccionado = obtenerJugadorPartido(jugador);
         recyclerViewActual = recyclerView;
 
         // Mostrar botones
@@ -268,14 +262,28 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
         btnFalta.setOnClickListener(ocultarBotonesListener);
     }
 
-    private void actualizarEstadisticaJugador(Jugador jugador, String estadistica) {
+    private JugadorPartido obtenerJugadorPartido(Jugador jugador) {
+        for (JugadorPartido jp : jugadoresLocal) {
+            if (jp.getIdJugador().equals(jugador.getIdJugador())) {
+                return jp;
+            }
+        }
+        for (JugadorPartido jp : jugadoresVisitante) {
+            if (jp.getIdJugador().equals(jugador.getIdJugador())) {
+                return jp;
+            }
+        }
+        return null;
+    }
+
+    private void actualizarEstadisticaJugador(JugadorPartido jugador, String estadistica) {
         String idEquipoLocal = idsEquipos.get(equipoSpinner.getSelectedItemPosition());
         String idEquipoVisitante = idsEquipos.get(equipoSpinner2.getSelectedItemPosition());
         boolean esLocal = jugador.getEquipoId().equals(idEquipoLocal);
 
         switch (estadistica) {
             case "tirosAnotadosT1":
-                jugador.incrementarTirosAnotadosT1();
+                jugador.setTirosAnotadosT1(jugador.getTirosAnotadosT1() + 1);
                 if (esLocal) {
                     puntosLocal += 1;
                 } else {
@@ -283,10 +291,10 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
                 }
                 break;
             case "tirosFalladosT1":
-                jugador.incrementarTirosFalladosT1();
+                jugador.setTirosFalladosT1(jugador.getTirosFalladosT1() + 1);
                 break;
             case "tirosAnotadosT2":
-                jugador.incrementarTirosAnotadosT2();
+                jugador.setTirosAnotadosT2(jugador.getTirosAnotadosT2() + 1);
                 if (esLocal) {
                     puntosLocal += 2;
                 } else {
@@ -294,10 +302,10 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
                 }
                 break;
             case "tirosFalladosT2":
-                jugador.incrementarTirosFalladosT2();
+                jugador.setTirosFalladosT2(jugador.getTirosFalladosT2() + 1);
                 break;
             case "tirosAnotadosT3":
-                jugador.incrementarTirosAnotadosT3();
+                jugador.setTirosAnotadosT3(jugador.getTirosAnotadosT3() + 1);
                 if (esLocal) {
                     puntosLocal += 3;
                 } else {
@@ -305,25 +313,25 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
                 }
                 break;
             case "tirosFalladosT3":
-                jugador.incrementarTirosFalladosT3();
+                jugador.setTirosFalladosT3(jugador.getTirosFalladosT3() + 1);
                 break;
             case "asistencias":
-                jugador.incrementarAsistencias();
+                jugador.setAsistencias(jugador.getAsistencias() + 1);
                 break;
             case "rebotes":
-                jugador.incrementarRebotes();
+                jugador.setRebotes(jugador.getRebotes() + 1);
                 break;
             case "robos":
-                jugador.incrementarRobos();
+                jugador.setRobos(jugador.getRobos() + 1);
                 break;
             case "tapones":
-                jugador.incrementarTapones();
+                jugador.setTapones(jugador.getTapones() + 1);
                 break;
             case "perdidas":
-                jugador.incrementarPerdidas();
+                jugador.setPerdidas(jugador.getPerdidas() + 1);
                 break;
             case "faltas":
-                jugador.incrementarFaltas();
+                jugador.setFaltas(jugador.getFaltas() + 1);
                 break;
         }
 
@@ -331,15 +339,20 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
         textViewPuntosLocal.setText(String.valueOf(puntosLocal));
         textViewPuntosVisitante.setText(String.valueOf(puntosVisitante));
 
-        // Actualizar la base de datos
-        db.collection("jugadores")
-                .document(jugador.getIdJugador())
-                .set(jugador)
-                .addOnSuccessListener(aVoid -> {
-                    // Actualización exitosa
-                })
-                .addOnFailureListener(e -> {
-                    // Manejar error de actualización
-                });
+        // Actualizar la lista de jugadores correspondiente
+        if (esLocal) {
+            actualizarJugadorEnLista(jugadoresLocal, jugador);
+        } else {
+            actualizarJugadorEnLista(jugadoresVisitante, jugador);
+        }
+    }
+
+    private void actualizarJugadorEnLista(List<JugadorPartido> listaJugadores, JugadorPartido jugadorActualizado) {
+        for (int i = 0; i < listaJugadores.size(); i++) {
+            if (listaJugadores.get(i).getIdJugador().equals(jugadorActualizado.getIdJugador())) {
+                listaJugadores.set(i, jugadorActualizado);
+                break;
+            }
+        }
     }
 }
