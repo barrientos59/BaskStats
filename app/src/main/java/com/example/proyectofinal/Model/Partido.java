@@ -7,20 +7,10 @@ public class Partido {
     private String idPartido;
     private int puntosLocal;
     private int puntosVisitante;
-    private List<JugadorPartido> jugadoresLocal;
-    private List<JugadorPartido> jugadoresVisitante;
+    private List<Jugador> jugadores;
 
     public Partido() {
-        jugadoresLocal = new ArrayList<>();
-        jugadoresVisitante = new ArrayList<>();
-    }
-
-    public Partido(String idPartido, int puntosLocal, int puntosVisitante, List<JugadorPartido> jugadoresLocal, List<JugadorPartido> jugadoresVisitante) {
-        this.idPartido = idPartido;
-        this.puntosLocal = puntosLocal;
-        this.puntosVisitante = puntosVisitante;
-        this.jugadoresLocal = jugadoresLocal;
-        this.jugadoresVisitante = jugadoresVisitante;
+        jugadores = new ArrayList<>();
     }
 
     public String getIdPartido() {
@@ -47,30 +37,27 @@ public class Partido {
         this.puntosVisitante = puntosVisitante;
     }
 
-    public List<JugadorPartido> getJugadoresLocal() {
-        return jugadoresLocal;
+    public List<Jugador> getJugadores() {
+        return jugadores;
     }
 
-    public void setJugadoresLocal(List<JugadorPartido> jugadoresLocal) {
-        this.jugadoresLocal = jugadoresLocal;
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
     }
 
-    public List<JugadorPartido> getJugadoresVisitante() {
-        return jugadoresVisitante;
+    // Método para agregar un jugador al partido
+    public void agregarJugador(Jugador jugador) {
+        jugadores.add(jugador);
     }
 
-    public void setJugadoresVisitante(List<JugadorPartido> jugadoresVisitante) {
-        this.jugadoresVisitante = jugadoresVisitante;
-    }
-
+    // Método para representar el objeto como una cadena de texto
     @Override
     public String toString() {
         return "Partido{" +
                 "idPartido='" + idPartido + '\'' +
                 ", puntosLocal=" + puntosLocal +
                 ", puntosVisitante=" + puntosVisitante +
-                ", jugadoresLocal=" + jugadoresLocal +
-                ", jugadoresVisitante=" + jugadoresVisitante +
+                ", jugadores=" + jugadores +
                 '}';
     }
 }

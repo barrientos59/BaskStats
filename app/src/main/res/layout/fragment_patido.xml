@@ -103,7 +103,7 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout_botones"
+        android:id="@+id/linearLayout_botones_extra"
         android:layout_width="360dp"
         android:layout_height="330dp"
         android:layout_below="@id/imageView_cancha"
