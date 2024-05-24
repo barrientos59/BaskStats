@@ -5,20 +5,50 @@ import java.util.List;
 
 public class Partido {
     private String idPartido;
+    private String equipoLocal;
+    private String equipoVisitante;
     private int puntosLocal;
     private int puntosVisitante;
-    private List<Jugador> jugadores;
+    private List<JugadorPartido> jugadoresLocal;
+    private List<JugadorPartido> jugadoresVisitante;
 
     public Partido() {
-        jugadores = new ArrayList<>();
+        // Constructor vacío necesario para Firestore
     }
 
+    public Partido(String idPartido, String equipoLocal, String equipoVisitante, int puntosLocal, int puntosVisitante, List<JugadorPartido> jugadoresLocal, List<JugadorPartido> jugadoresVisitante) {
+        this.idPartido = idPartido;
+        this.equipoLocal = equipoLocal;
+        this.equipoVisitante = equipoVisitante;
+        this.puntosLocal = puntosLocal;
+        this.puntosVisitante = puntosVisitante;
+        this.jugadoresLocal = jugadoresLocal;
+        this.jugadoresVisitante = jugadoresVisitante;
+    }
+
+    // Getters and setters
     public String getIdPartido() {
         return idPartido;
     }
 
     public void setIdPartido(String idPartido) {
         this.idPartido = idPartido;
+    }
+
+    public String getEquipoLocal() {
+        return equipoLocal;
+    }
+
+    public void setEquipoLocal(String equipoLocal) {
+        this.equipoLocal = equipoLocal;
+    }
+
+    public String getEquipoVisitante() {
+        return equipoVisitante;
+    }
+
+    public void setEquipoVisitante(String equipoVisitante) {
+        this.equipoVisitante = equipoVisitante;
     }
 
     public int getPuntosLocal() {
@@ -37,27 +67,19 @@ public class Partido {
         this.puntosVisitante = puntosVisitante;
     }
 
-    public List<Jugador> getJugadores() {
-        return jugadores;
+    public List<JugadorPartido> getJugadoresLocal() {
+        return jugadoresLocal;
     }
 
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
+    public void setJugadoresLocal(List<JugadorPartido> jugadoresLocal) {
+        this.jugadoresLocal = jugadoresLocal;
     }
 
-    // Método para agregar un jugador al partido
-    public void agregarJugador(Jugador jugador) {
-        jugadores.add(jugador);
+    public List<JugadorPartido> getJugadoresVisitante() {
+        return jugadoresVisitante;
     }
 
-    // Método para representar el objeto como una cadena de texto
-    @Override
-    public String toString() {
-        return "Partido{" +
-                "idPartido='" + idPartido + '\'' +
-                ", puntosLocal=" + puntosLocal +
-                ", puntosVisitante=" + puntosVisitante +
-                ", jugadores=" + jugadores +
-                '}';
+    public void setJugadoresVisitante(List<JugadorPartido> jugadoresVisitante) {
+        this.jugadoresVisitante = jugadoresVisitante;
     }
 }

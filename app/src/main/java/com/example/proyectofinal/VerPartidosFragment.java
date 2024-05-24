@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proyectofinal.Adapter.PartidoAdapter;
 import com.example.proyectofinal.Model.Partido;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,7 +19,7 @@ import com.google.firebase.firestore.Query;
 public class VerPartidosFragment extends Fragment {
 
     private FirebaseFirestore db;
-    private PartidoAdapter partidoAdapter;
+    //private PartidoAdapter partidoAdapter;
 
     @Nullable
     @Override
@@ -37,8 +36,8 @@ public class VerPartidosFragment extends Fragment {
                 .setQuery(query, Partido.class)
                 .build();
 
-        partidoAdapter = new PartidoAdapter(options);
-        recyclerView.setAdapter(partidoAdapter);
+       // partidoAdapter = new PartidoAdapter(options);
+       // recyclerView.setAdapter(partidoAdapter);
 
         return rootView;
     }
@@ -46,12 +45,12 @@ public class VerPartidosFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        partidoAdapter.startListening();
+        //partidoAdapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        partidoAdapter.stopListening();
+        //0partidoAdapter.stopListening();
     }
 }
