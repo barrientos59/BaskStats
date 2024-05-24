@@ -122,7 +122,7 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
 
         btnFinalizar.setOnClickListener(v -> {
             guardarPartido();
-            navController.navigate(R.id.menuPrincipal); // Navega a MenuFragment
+            navController.navigate(R.id.menuPrincipal);
         });
 
         return rootView;
