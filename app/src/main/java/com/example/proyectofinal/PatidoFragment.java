@@ -337,17 +337,20 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
                 break;
         }
 
-        // Actualizar vista de puntos locales o visitantes
+        // Actualizar Firestore con las nuevas estadísticas del jugador
+        db.collection("jugadores").document(jugador.getIdJugador())
+                .set(jugador)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Estadística actualizada", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error al actualizar la estadística", Toast.LENGTH_SHORT).show();
+                });
+
         textViewPuntosLocal.setText(String.valueOf(puntosLocal));
         textViewPuntosVisitante.setText(String.valueOf(puntosVisitante));
-
-        // Actualizar la lista de jugadores correspondiente
-        if (esLocal) {
-            actualizarJugadorEnLista(jugadoresLocal, jugador);
-        } else {
-            actualizarJugadorEnLista(jugadoresVisitante, jugador);
-        }
     }
+
 
     private void actualizarJugadorEnLista(List<JugadorPartido> listaJugadores, JugadorPartido jugadorActualizado) {
         for (int i = 0; i < listaJugadores.size(); i++) {

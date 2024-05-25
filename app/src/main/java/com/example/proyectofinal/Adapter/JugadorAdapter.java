@@ -1,5 +1,6 @@
 package com.example.proyectofinal.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,19 +23,20 @@ public class JugadorAdapter extends FirestoreRecyclerAdapter<Jugador, JugadorAda
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int i, @NonNull Jugador jugador) {
+        // Log the data
+        Log.d("JugadorAdapter", "Jugador: " + jugador.getNombre() + ", Puntos: " + jugador.getPuntos() +
+                ", Asistencias: " + jugador.getAsistencias() + ", Rebotes: " + jugador.getRebotes());
 
         viewHolder.textViewPlayerName.setText(jugador.getDorsal());
         viewHolder.textViewPoints.setText("Puntos: " + jugador.getPuntos());
         viewHolder.textViewAssists.setText("Asistencias: " + jugador.getAsistencias());
         viewHolder.textViewRebounds.setText("Rebotes: " + jugador.getRebotes());
-        viewHolder.textViewRobos.setText("Robos: " + jugador.getRobos()); // Mostrar el valor de los robos
+        viewHolder.textViewRobos.setText("Robos: " + jugador.getRobos());
         viewHolder.textViewBlocks.setText("Tapones: " + jugador.getTapones());
         viewHolder.textViewTurnovers.setText("Pérdidas: " + jugador.getPerdidas());
         viewHolder.textViewFouls.setText("Faltas: " + jugador.getFaltas());
-
-        // Si tienes la URL de la imagen del jugador, puedes cargarla utilizando Glide
-        // Glide.with(viewHolder.itemView.getContext()).load(jugador.getImageUrl()).into(viewHolder.imageViewPlayer);
     }
+
 
     @NonNull
     @Override

@@ -24,7 +24,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.bumptech.glide.Glide;
-
 public class ListaJugadoresEquipo extends Fragment {
 
     NavController navController;
@@ -52,32 +51,8 @@ public class ListaJugadoresEquipo extends Fragment {
                 .setQuery(query, Jugador.class)
                 .build();
 
-        // Obtener información del equipo
-        DocumentReference equipoRef = firestore.collection("equipos").document(equipoIdSeleccionado);
-        equipoRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    Equipo equipo = documentSnapshot.toObject(Equipo.class);
-                    if (equipo != null) {
-                        // Establecer el logo y el nombre del equipo en las vistas correspondientes
-                        ImageView logoImageView = view.findViewById(R.id.imageViewLogo);
-                        TextView nombreEquipoTextView = view.findViewById(R.id.textViewName);
-                        // Aquí estableces el logo y el nombre del equipo en las vistas
-                        nombreEquipoTextView.setText(equipo.getNombre());
-                        // Utiliza Glide u otra biblioteca para cargar la imagen del logo
-                        Glide.with(requireContext()).load(equipo.getLogo()).into(logoImageView);
-
-                        // Crear y establecer el adaptador para el RecyclerView
-                        jugadorAdapter = new JugadorAdapter(options);
-                        recyclerListone.setAdapter(jugadorAdapter);
-
-                        // Llamar a startListening() aquí después de que jugadorAdapter se haya inicializado correctamente
-                        jugadorAdapter.startListening();
-                    }
-                }
-            }
-        });
+        jugadorAdapter = new JugadorAdapter(options);
+        recyclerListone.setAdapter(jugadorAdapter);
 
         return view;
     }
@@ -85,14 +60,12 @@ public class ListaJugadoresEquipo extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // No es necesario llamar a startListening() aquí ya que se ha llamado dentro del callback onSuccess()
+        jugadorAdapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (jugadorAdapter != null) {
-            jugadorAdapter.stopListening();
-        }
+        jugadorAdapter.stopListening();
     }
 }
