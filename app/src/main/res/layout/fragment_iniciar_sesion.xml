@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:id="@+id/signInForm"
-        android:layout_width="353dp"
-        android:layout_height="646dp"
+        android:layout_width="314dp"
+        android:layout_height="634dp"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,8 +36,8 @@
             android:layout_marginEnd="@dimen/_10pxh"
             android:ellipsize="end"
             android:gravity="start"
+            android:paddingLeft="15dp"
             android:singleLine="true"
-            android:paddingLeft="5dp"
             android:text="Login with email/password" />
 
         <EditText
@@ -95,24 +95,24 @@
             android:textAllCaps="false" />
 
         <TextView
-            android:layout_marginTop="@dimen/_29pxv"
             android:id="@+id/gotoCreateAccountTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/blue_A200"
-            android:text="Create account here" />
+            android:layout_marginTop="@dimen/_29pxv"
+            android:text="Create account here"
+            android:textColor="@color/blue_A200" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray_100"
-            android:text="Login with your Google account" />
+            android:text="Login with your Google account"
+            android:textColor="@color/gray_100" />
 
         <com.google.android.gms.common.SignInButton
-            android:layout_marginTop="@dimen/_29pxv"
             android:id="@+id/googleSignInButton"
-            android:layout_width="151dp"
-            android:layout_height="44dp" />
+            android:layout_width="250dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="@dimen/_29pxv" />
     </LinearLayout>
 
     <ProgressBar
