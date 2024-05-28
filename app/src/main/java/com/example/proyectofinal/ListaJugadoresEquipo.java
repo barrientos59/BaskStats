@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,14 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal.Adapter.JugadorAdapter;
 import com.example.proyectofinal.Model.Jugador;
-import com.example.proyectofinal.Model.Equipo;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.bumptech.glide.Glide;
+
 public class ListaJugadoresEquipo extends Fragment {
 
     NavController navController;
@@ -51,7 +45,7 @@ public class ListaJugadoresEquipo extends Fragment {
                 .setQuery(query, Jugador.class)
                 .build();
 
-        jugadorAdapter = new JugadorAdapter(options);
+        jugadorAdapter = new JugadorAdapter(options, requireContext());
         recyclerListone.setAdapter(jugadorAdapter);
 
         return view;

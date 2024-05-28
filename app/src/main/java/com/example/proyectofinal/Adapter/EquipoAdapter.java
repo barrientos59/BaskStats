@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -17,14 +18,17 @@ import com.example.proyectofinal.Model.Equipo;
 import com.example.proyectofinal.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EquipoAdapter extends FirestoreRecyclerAdapter<Equipo, EquipoAdapter.EquipoViewHolder> {
 
     private Context mContext;
+    private FirebaseFirestore firestore;
 
     public EquipoAdapter(@NonNull FirestoreRecyclerOptions<Equipo> options, Context context) {
         super(options);
         mContext = context;
+        firestore = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -49,6 +53,26 @@ public class EquipoAdapter extends FirestoreRecyclerAdapter<Equipo, EquipoAdapte
                 Navigation.findNavController(view).navigate(R.id.listaJugadoresEquipo, bundle);
             }
         });
+
+        // Agregar OnClickListener para el icono de eliminación
+        holder.deleteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String equipoId = getSnapshots().getSnapshot(position).getId();
+                deleteEquipo(equipoId);
+            }
+        });
+    }
+
+    private void deleteEquipo(String equipoId) {
+        firestore.collection("equipos").document(equipoId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(mContext, "Equipo eliminado", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(mContext, "Error al eliminar equipo", Toast.LENGTH_SHORT).show();
+                });
     }
 
     @NonNull
@@ -61,11 +85,13 @@ public class EquipoAdapter extends FirestoreRecyclerAdapter<Equipo, EquipoAdapte
     static class EquipoViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewLogo;
         TextView textViewName;
+        ImageView deleteIcon;
 
         public EquipoViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewLogo = itemView.findViewById(R.id.imageViewLogo);
             textViewName = itemView.findViewById(R.id.textViewName);
+            deleteIcon = itemView.findViewById(R.id.deleteIcon);
         }
     }
 }

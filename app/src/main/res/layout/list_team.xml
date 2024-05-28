@@ -21,6 +21,12 @@
         android:layout_marginTop="15dp"
         android:textColor="@color/white"
         android:textSize="20sp" />
+    <ImageView
+        android:id="@+id/deleteIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_delete" />
 
 </LinearLayout>
 
