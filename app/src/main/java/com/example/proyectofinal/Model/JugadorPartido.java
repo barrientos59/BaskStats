@@ -20,6 +20,7 @@ public class JugadorPartido {
     private int tapones;
     private int perdidas;
     private int faltas;
+    private int puntos;
 
     public JugadorPartido() {
     }
@@ -32,7 +33,13 @@ public class JugadorPartido {
         this.posicion = posicion;
         this.equipoId = equipoId;
     }
+    public int getPuntos() {
+        return puntos;
+    }
 
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
     public String getIdJugador() {
         return idJugador;
     }

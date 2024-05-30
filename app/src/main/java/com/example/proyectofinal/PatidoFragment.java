@@ -283,72 +283,87 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
         String idEquipoVisitante = idsEquipos.get(equipoSpinner2.getSelectedItemPosition());
         boolean esLocal = jugador.getEquipoId().equals(idEquipoLocal);
 
-        switch (estadistica) {
-            case "tirosAnotadosT1":
-                jugador.setTirosAnotadosT1(jugador.getTirosAnotadosT1() + 1);
-                if (esLocal) {
-                    puntosLocal += 1;
-                } else {
-                    puntosVisitante += 1;
-                }
-                break;
-            case "tirosFalladosT1":
-                jugador.setTirosFalladosT1(jugador.getTirosFalladosT1() + 1);
-                break;
-            case "tirosAnotadosT2":
-                jugador.setTirosAnotadosT2(jugador.getTirosAnotadosT2() + 1);
-                if (esLocal) {
-                    puntosLocal += 2;
-                } else {
-                    puntosVisitante += 2;
-                }
-                break;
-            case "tirosFalladosT2":
-                jugador.setTirosFalladosT2(jugador.getTirosFalladosT2() + 1);
-                break;
-            case "tirosAnotadosT3":
-                jugador.setTirosAnotadosT3(jugador.getTirosAnotadosT3() + 1);
-                if (esLocal) {
-                    puntosLocal += 3;
-                } else {
-                    puntosVisitante += 3;
-                }
-                break;
-            case "tirosFalladosT3":
-                jugador.setTirosFalladosT3(jugador.getTirosFalladosT3() + 1);
-                break;
-            case "asistencias":
-                jugador.setAsistencias(jugador.getAsistencias() + 1);
-                break;
-            case "rebotes":
-                jugador.setRebotes(jugador.getRebotes() + 1);
-                break;
-            case "robos":
-                jugador.setRobos(jugador.getRobos() + 1);
-                break;
-            case "tapones":
-                jugador.setTapones(jugador.getTapones() + 1);
-                break;
-            case "perdidas":
-                jugador.setPerdidas(jugador.getPerdidas() + 1);
-                break;
-            case "faltas":
-                jugador.setFaltas(jugador.getFaltas() + 1);
-                break;
-        }
+        db.collection("jugadores").document(jugador.getIdJugador()).get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                JugadorPartido jugadorExistente = documentSnapshot.toObject(JugadorPartido.class);
+                if (jugadorExistente != null) {
+                    switch (estadistica) {
+                        case "tirosAnotadosT1":
+                            jugadorExistente.setTirosAnotadosT1(jugadorExistente.getTirosAnotadosT1() + 1);
+                            if (esLocal) {
+                                puntosLocal += 1;
+                            } else {
+                                puntosVisitante += 1;
+                            }
+                            break;
+                        case "tirosFalladosT1":
+                            jugadorExistente.setTirosFalladosT1(jugadorExistente.getTirosFalladosT1() + 1);
+                            break;
+                        case "tirosAnotadosT2":
+                            jugadorExistente.setTirosAnotadosT2(jugadorExistente.getTirosAnotadosT2() + 1);
+                            if (esLocal) {
+                                puntosLocal += 2;
+                            } else {
+                                puntosVisitante += 2;
+                            }
+                            break;
+                        case "tirosFalladosT2":
+                            jugadorExistente.setTirosFalladosT2(jugadorExistente.getTirosFalladosT2() + 1);
+                            break;
+                        case "tirosAnotadosT3":
+                            jugadorExistente.setTirosAnotadosT3(jugadorExistente.getTirosAnotadosT3() + 1);
+                            if (esLocal) {
+                                puntosLocal += 3;
+                            } else {
+                                puntosVisitante += 3;
+                            }
+                            break;
+                        case "tirosFalladosT3":
+                            jugadorExistente.setTirosFalladosT3(jugadorExistente.getTirosFalladosT3() + 1);
+                            break;
+                        case "asistencias":
+                            jugadorExistente.setAsistencias(jugadorExistente.getAsistencias() + 1);
+                            break;
+                        case "rebotes":
+                            jugadorExistente.setRebotes(jugadorExistente.getRebotes() + 1);
+                            break;
+                        case "robos":
+                            jugadorExistente.setRobos(jugadorExistente.getRobos() + 1);
+                            break;
+                        case "tapones":
+                            jugadorExistente.setTapones(jugadorExistente.getTapones() + 1);
+                            break;
+                        case "perdidas":
+                            jugadorExistente.setPerdidas(jugadorExistente.getPerdidas() + 1);
+                            break;
+                        case "faltas":
+                            jugadorExistente.setFaltas(jugadorExistente.getFaltas() + 1);
+                            break;
+                    }
 
-        // Actualizar Firestore con las nuevas estadísticas del jugador
-        db.collection("jugadores").document(jugador.getIdJugador())
-                .set(jugador)
-                .addOnSuccessListener(aVoid -> {
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al actualizar la estadística", Toast.LENGTH_SHORT).show();
-                });
+                    // Calcula los puntos totales del jugador
+                    int puntos = jugadorExistente.getTirosAnotadosT1() + (jugadorExistente.getTirosAnotadosT2() * 2) + (jugadorExistente.getTirosAnotadosT3() * 3);
+                    jugadorExistente.setPuntos(puntos);
 
-        textViewPuntosLocal.setText(String.valueOf(puntosLocal));
-        textViewPuntosVisitante.setText(String.valueOf(puntosVisitante));
+                    // Actualizar Firestore con las nuevas estadísticas del jugador
+                    db.collection("jugadores").document(jugadorExistente.getIdJugador())
+                            .set(jugadorExistente)
+                            .addOnSuccessListener(aVoid -> {
+                                // Estadísticas actualizadas correctamente
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(getContext(), "Error al actualizar la estadística", Toast.LENGTH_SHORT).show();
+                            });
+
+                    textViewPuntosLocal.setText(String.valueOf(puntosLocal));
+                    textViewPuntosVisitante.setText(String.valueOf(puntosVisitante));
+                }
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(getContext(), "Error al obtener estadísticas del jugador", Toast.LENGTH_SHORT).show();
+        });
     }
+
 
 
     private void actualizarJugadorEnLista(List<JugadorPartido> listaJugadores, JugadorPartido jugadorActualizado) {
