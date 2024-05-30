@@ -341,7 +341,6 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
         db.collection("jugadores").document(jugador.getIdJugador())
                 .set(jugador)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(getContext(), "Estadística actualizada", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Error al actualizar la estadística", Toast.LENGTH_SHORT).show();

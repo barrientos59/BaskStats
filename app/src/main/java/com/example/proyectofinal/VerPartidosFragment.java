@@ -34,7 +34,7 @@ public class VerPartidosFragment extends Fragment {
                 .setQuery(query, Partido.class)
                 .build();
 
-        partidoAdapter = new PartidoAdapter(options);
+        partidoAdapter = new PartidoAdapter(options, getContext()); // Asegúrate de pasar el contexto aquí
         recyclerView.setAdapter(partidoAdapter);
 
         return rootView;
