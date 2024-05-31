@@ -143,28 +143,28 @@
 
             <Button
                 android:id="@+id/btnAnotaTl"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="+TL" />
 
             <Button
                 android:id="@+id/btnFallaTl"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="-TL" />
 
             <Button
                 android:id="@+id/btnAnotaT2"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="+T2" />
 
             <Button
                 android:id="@+id/btnFallaT2"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="-T2" />
@@ -178,28 +178,28 @@
 
             <Button
                 android:id="@+id/btnAnotaT3"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="+T3" />
 
             <Button
                 android:id="@+id/btnFallaT3"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="-T3" />
 
             <Button
                 android:id="@+id/btnRebote"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="REB" />
 
             <Button
                 android:id="@+id/btnRobo"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="ROB" />
@@ -213,28 +213,28 @@
 
             <Button
                 android:id="@+id/btnAsistencia"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="ASIS" />
 
             <Button
                 android:id="@+id/btnPerdida"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="PER" />
 
             <Button
                 android:id="@+id/btnTap"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="TAP" />
 
             <Button
                 android:id="@+id/btnfalta"
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="FP" />
