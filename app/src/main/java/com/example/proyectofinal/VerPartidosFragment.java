@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.proyectofinal.Adapter.PartidoAdapter;
 import com.example.proyectofinal.Model.Partido;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
 public class VerPartidosFragment extends Fragment {
 
     private FirebaseFirestore db;
@@ -26,15 +27,18 @@ public class VerPartidosFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_ver_partidos, container, false);
         db = FirebaseFirestore.getInstance();
 
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = currentUser.getUid();
+
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerViewEstadisticas);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Query query = db.collection("partidos");
+        Query query = db.collection("partidos").whereEqualTo("idAutor", currentUserId);
         FirestoreRecyclerOptions<Partido> options = new FirestoreRecyclerOptions.Builder<Partido>()
                 .setQuery(query, Partido.class)
                 .build();
 
-        partidoAdapter = new PartidoAdapter(options, getContext()); // Asegúrate de pasar el contexto aquí
+        partidoAdapter = new PartidoAdapter(options, getContext());
         recyclerView.setAdapter(partidoAdapter);
 
         return rootView;

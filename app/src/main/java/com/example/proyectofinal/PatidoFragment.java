@@ -198,10 +198,13 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
     }
 
     private void guardarPartido() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = currentUser.getUid();
+
         String partidoId = UUID.randomUUID().toString();
         String equipoLocal = equipoSpinner.getSelectedItem().toString();
         String equipoVisitante = equipoSpinner2.getSelectedItem().toString();
-        Partido partido = new Partido(partidoId, equipoLocal, equipoVisitante, puntosLocal, puntosVisitante, jugadoresLocal, jugadoresVisitante);
+        Partido partido = new Partido(partidoId, equipoLocal, equipoVisitante, puntosLocal, puntosVisitante, jugadoresLocal, jugadoresVisitante, currentUserId);
 
         // Guardar el partido en la colección de partidos
         db.collection("partidos").document(partidoId).set(partido)

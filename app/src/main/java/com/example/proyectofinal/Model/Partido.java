@@ -1,6 +1,7 @@
 package com.example.proyectofinal.Model;
 
-import java.util.ArrayList;
+
+
 import java.util.List;
 
 public class Partido {
@@ -11,12 +12,13 @@ public class Partido {
     private int puntosVisitante;
     private List<JugadorPartido> jugadoresLocal;
     private List<JugadorPartido> jugadoresVisitante;
+    private String idAutor;
 
     public Partido() {
         // Constructor vacío necesario para Firestore
     }
 
-    public Partido(String idPartido, String equipoLocal, String equipoVisitante, int puntosLocal, int puntosVisitante, List<JugadorPartido> jugadoresLocal, List<JugadorPartido> jugadoresVisitante) {
+    public Partido(String idPartido, String equipoLocal, String equipoVisitante, int puntosLocal, int puntosVisitante, List<JugadorPartido> jugadoresLocal, List<JugadorPartido> jugadoresVisitante, String idAutor) {
         this.idPartido = idPartido;
         this.equipoLocal = equipoLocal;
         this.equipoVisitante = equipoVisitante;
@@ -24,9 +26,10 @@ public class Partido {
         this.puntosVisitante = puntosVisitante;
         this.jugadoresLocal = jugadoresLocal;
         this.jugadoresVisitante = jugadoresVisitante;
+        this.idAutor = idAutor; // Inicializar el nuevo campo
     }
 
-    // Getters and setters
+    // Getters y setters
     public String getIdPartido() {
         return idPartido;
     }
@@ -81,5 +84,13 @@ public class Partido {
 
     public void setJugadoresVisitante(List<JugadorPartido> jugadoresVisitante) {
         this.jugadoresVisitante = jugadoresVisitante;
+    }
+
+    public String getIdAutor() {
+        return idAutor;
+    }
+
+    public void setIdAutor(String idAutor) {
+        this.idAutor = idAutor;
     }
 }

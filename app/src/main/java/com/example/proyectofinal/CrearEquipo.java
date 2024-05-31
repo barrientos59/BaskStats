@@ -137,7 +137,7 @@ public class CrearEquipo extends Fragment {
         db.collection("equipos").document(equipo.getId()).set(equipo)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(requireContext(), "Equipo creado", Toast.LENGTH_SHORT).show();
-                    navController.navigate(R.id.menuCrear);
+                    navController.navigateUp(); // Regresar al fragmento anterior
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(requireContext(), "Error al crear equipo", Toast.LENGTH_SHORT).show();
