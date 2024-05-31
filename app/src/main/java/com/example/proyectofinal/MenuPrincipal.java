@@ -88,7 +88,7 @@ public class MenuPrincipal extends Fragment {
         noticias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.noticias);
+                Navigation.findNavController(view).navigate(R.id.postFragment);
             }
         });
 

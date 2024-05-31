@@ -97,21 +97,6 @@ public class CrearEquipo extends Fragment {
                 openGallery();
             }
         });
-
-        etUbiCrearEquipo.setOnClickListener(new View.OnClickListener() {
-            private long lastClickTime = 0;
-            private static final long DOUBLE_CLICK_TIME_DELTA = 300;
-
-            @Override
-            public void onClick(View v) {
-                long clickTime = System.currentTimeMillis();
-                if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
-                    openMapFragment();
-                }
-                lastClickTime = clickTime;
-            }
-        });
-
         return view;
     }
 
@@ -159,9 +144,5 @@ public class CrearEquipo extends Fragment {
                 });
     }
 
-    private void openMapFragment() {
-        Bundle bundle = new Bundle();
-        bundle.putString("location", etUbiCrearEquipo.getText().toString());
-        navController.navigate(R.id.mapa, bundle);
-    }
+
 }

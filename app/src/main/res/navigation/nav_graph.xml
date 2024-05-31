@@ -60,28 +60,28 @@
         android:label="fragment_sign_out"
         tools:layout="@layout/fragment_sign_out" />
     <fragment
-        android:id="@+id/mapa"
-        android:name="com.example.proyectofinal.MapaFragment"
-        android:label="fragment_mapa"
-        tools:layout="@layout/fragment_mapa" />
-    <fragment
         android:id="@+id/verEstadisticaFragment"
         android:name="com.example.proyectofinal.VerPartidosFragment"
         android:label="fragment_ver_estadistica"
         tools:layout="@layout/fragment_ver_partidos" />
     <fragment
-        android:id="@+id/estadisticaPartido"
-        android:name="com.example.proyectofinal.EstadisticaPartido"
-        android:label="fragment_estadistica_partido"
-        tools:layout="@layout/fragment_estadistica_partido" />
-    <fragment
-        android:id="@+id/noticias"
-        android:name="com.example.proyectofinal.Noticias"
-        android:label="fragment_noticias"
-        tools:layout="@layout/fragment_noticias" />
-    <fragment
         android:id="@+id/menuCrear"
         android:name="com.example.proyectofinal.MenuCrear"
         android:label="fragment_menu_crear"
         tools:layout="@layout/fragment_menu_crear" />
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.example.proyectofinal.PostFragment"
+        android:label="fragment_post"
+        tools:layout="@layout/fragment_post" />
+    <fragment
+        android:id="@+id/newPostFragment"
+        android:name="com.example.proyectofinal.NewPostFragment"
+        android:label="fragment_new_post"
+        tools:layout="@layout/fragment_new_post" />
+    <fragment
+        android:id="@+id/mediaFragment"
+        android:name="com.example.proyectofinal.MediaFragment"
+        android:label="fragment_media"
+        tools:layout="@layout/fragment_media" />
 </navigation>

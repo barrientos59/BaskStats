@@ -111,7 +111,7 @@
                 android:paddingEnd="@dimen/_30pxh"
                 android:paddingStart="@dimen/_30pxh"
                 android:paddingTop="@dimen/_17pxv"
-                android:text="Noticias NBA"/>
+                android:text="SocialBask"/>
 
 
         </LinearLayout>
