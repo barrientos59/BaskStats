@@ -213,6 +213,7 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
                 });
     }
 
+
     @Override
     public void onItemClick(Jugador jugador, RecyclerView recyclerView) {
         jugadorSeleccionado = obtenerJugadorPartido(jugador);
@@ -344,6 +345,10 @@ public class PatidoFragment extends Fragment implements JugadoresAdapterPartido.
                     // Calcula los puntos totales del jugador
                     int puntos = jugadorExistente.getTirosAnotadosT1() + (jugadorExistente.getTirosAnotadosT2() * 2) + (jugadorExistente.getTirosAnotadosT3() * 3);
                     jugadorExistente.setPuntos(puntos);
+
+                    // Actualizar la lista local del jugador
+                    actualizarJugadorEnLista(jugadoresLocal, jugadorExistente);
+                    actualizarJugadorEnLista(jugadoresVisitante, jugadorExistente);
 
                     // Actualizar Firestore con las nuevas estadísticas del jugador
                     db.collection("jugadores").document(jugadorExistente.getIdJugador())
