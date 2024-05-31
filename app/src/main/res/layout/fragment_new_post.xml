@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="NewPostFragment">
+    tools:context="NewPostFragment"
+    android:background="@color/gray_100">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +20,7 @@
             android:id="@+id/postContentEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="¿Qué pasa contigo?"
+            android:hint="Comparte tu momento del día con nosotros."
             android:textSize="24sp"
             android:lines="6"
             android:gravity="top|left">

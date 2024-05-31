@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_65pxv"
             android:layout_marginBottom="20dp"
+            android:paddingLeft="30dp"
             android:ellipsize="end"
             android:gravity="start"
             android:singleLine="true"

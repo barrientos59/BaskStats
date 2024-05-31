@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".PostFragment"
-    style="@style/groupStyle_2">
+    style="@style/groupStyle_4">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postsRecyclerView"
@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/pen" />
+        app:srcCompat="@drawable/pen"
+        app:backgroundTint="@color/orange_400"/>
 
 </FrameLayout>
